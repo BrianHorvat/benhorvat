@@ -1,0 +1,164 @@
+@charset "utf-8";
+
+@import "normalize";
+@import "~bulma";
+
+@font-face {
+  font-family: 'Dense';
+  src: url('assets/dense-regular-webfont.woff2') format('woff2'),
+  url('assets/dense-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Fonts
+$base-font-family: "Lato", sans-serif;
+$base-font-size: 16px;
+$base-font-weight: 400;
+$base-line-height: 1.4;
+
+$bold-font-weight: normal;
+
+$accent-font-family: "Julius Sans One", sans-serif;
+
+$font-primary: rgba(0, 0, 0, 0.87);
+$font-light-grey: rgba(0, 0, 0, 0.7);
+$font-grey: rgba(0, 0, 0, 0.54);
+$font-disabled: rgba(0, 0, 0, 0.3);
+
+$highlight-primary: rgb(0, 0, 0);
+
+$link-color: hsla(207, 123%, 41%, 1);
+$link-hover: hsla(215, 100%, 45%, 1);
+
+$icon-color: $font-primary;
+
+$corner-radius: 0px;
+
+// Main bg Colors
+$bg-main: #fafafa;
+$bg-card: rgba(0, 0, 0, 0.05);
+$bg-card-light: rgba(0, 0, 0, 0.10);
+
+// Misc Colors
+$hr-color: #eee;
+
+$transition: (
+  fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1),
+  linear-out-slow-in: cubic-bezier(0.0, 0.0, 0.2, 1),
+  fast-out-linear-in: cubic-bezier(0.4, 0.0, 1, 1),
+  ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1),
+  fast-in-fast-out: cubic-bezier(.25, .8, .25, 1),
+  swing: cubic-bezier(.25, .8, .25, 1)
+);
+
+/***
+ ***/
+
+/*
+ * Default element restyles
+ */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  transition-timing-function: map-get($transition, ease-in-out);
+}
+
+body {
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+  color: $font-primary;
+
+  background: $bg-main;
+
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+}
+
+/*b, strong,
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $bold-font-weight;
+}*/
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  transition: color 0.15s;
+
+  &:hover {
+    color: $link-hover;
+  }
+}
+
+hr {
+  border: 1px solid $hr-color;
+}
+
+// For some reason these are a thing...
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*
+ * Webkit scrollbar style
+ */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ddd;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+/**
+No script
+ */
+
+noscript {
+  display: flex;
+  font-size: 1.2em;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+noscript + .spinner {
+  display: none;
+}
+
+/***
+ ***/
+
+@import "layout/components/header",
+"layout/components/footer",
+"layout/includes/spinner",
+"layout/components/progressiveimg",
+"layout/includes/socialicon",
+"layout/layout",
+"layout/pages/feed",
+"layout/pages/post",
+"layout/pages/contact",
+"layout/pages/about",
+"layout/components/gallery",
+"layout/components/lightbox",
+"layout/transitions/feed",
+"layout/transitions/pages";

@@ -1,0 +1,43 @@
+ul.social-media {
+
+  li.social-icon {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      svg {
+        display: block;
+        width: 1.25em;
+        height: 1.25em;
+
+        transition: fill 0.2s;
+
+        fill: $font-grey;
+      }
+
+      span {
+        transition: color 0.2s;
+      }
+
+      &:hover {
+        svg {
+          fill: $highlight-primary;
+        }
+
+        span {
+          color: $highlight-primary;
+        }
+      }
+    }
+
+    span {
+      margin-left: 0.5em;
+      color: $font-grey;
+    }
+  }
+}
+
+

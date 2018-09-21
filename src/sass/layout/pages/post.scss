@@ -1,0 +1,29 @@
+.post {
+  overflow: hidden;
+  width: 100%;
+
+  .post-title {
+    font-size: 2.25em;
+    font-family: $accent-font-family;
+    font-variant: small-caps;
+  }
+
+  .post-sidebar {
+    span.desc-label {
+      font-size: 0.9em;
+      color: $font-grey;
+    }
+
+    .pad {
+      margin-bottom: 0.5em;
+    }
+
+    li.social-icon {
+      margin-left: 0.5em;
+    }
+  }
+
+  .post-images {
+    padding-bottom: 1.5rem;
+  }
+}

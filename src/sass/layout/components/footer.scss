@@ -1,0 +1,47 @@
+/**
+ * Site footer
+ */
+
+// Footer Variables
+$footer-bg: white;
+$footer-border: 1px solid $hr-color;
+$footer-copy-color: $font-grey;
+$footer-inset: 2em;
+$footer-inset-mobile: 1em;
+// ---- ///
+
+footer.footer {
+  // border-top: $footer-border;
+
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 1em 0;
+  margin-top: 1em;
+
+  ul.social-media {
+    display: flex;
+    margin-right: 1em;
+    margin-left: $footer-inset;
+
+    @include mobile {
+      margin-left: $footer-inset-mobile;
+    }
+
+    li.social-icon + li.social-icon {
+      margin-left: 0.75em;
+    }
+  }
+
+  .copyright {
+    color: $footer-copy-color;
+    text-align: center;
+
+    display: block;
+    margin-left: auto;
+    margin-right: $footer-inset;
+  }
+}
+
+/***
+ ***/

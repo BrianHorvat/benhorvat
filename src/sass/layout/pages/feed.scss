@@ -1,0 +1,59 @@
+/**
+ * Gallery feed
+ */
+
+.reading .gallery__feed {
+  display: none;
+}
+
+section.feed {
+  div.filter {
+    margin-bottom: 0.5em;
+
+    span {
+      font-size: 0.9em;
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+
+  div.preview {
+    h2 {
+      color: $highlight-primary;
+      font-size: 1.2em;
+      font-family: $accent-font-family;
+      font-variant: small-caps;
+    }
+
+    .preview-figure {
+      background-size: cover;
+      background-position: center;
+
+      height: 0;
+      padding-bottom: 100%;
+
+      img {
+        object-position: 50% 30%
+      }
+    }
+  }
+}
+
+.feed-card {
+  background-color: white;
+  filter: drop-shadow(1px 2px 6px rgba(0,0,0,0.1));
+  transition: filter 0.2s;
+
+  border-radius: $corner-radius;
+  overflow: hidden;
+
+  &:hover {
+    filter: drop-shadow(1px 2px 9px rgba(0,0,0,0.2));
+  }
+
+  & &-title {
+    padding: 0.75rem;
+  }
+}
+
+/***
+ ***/
