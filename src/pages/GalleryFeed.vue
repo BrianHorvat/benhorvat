@@ -1,27 +1,21 @@
 <template>
   <section class="feed left">
-    <div class="container">
-      <transition-group name="feed-fade" tag="div" class="columns is-multiline is-mobile is-centered" v-if="this.feed.length > 0">
-        <div v-for="post in feed" class="preview column is-one-third-desktop is-half-mobile"
-             :key="post.id">
-          <div class="feed-card">
-            <router-link class="preview-title" :to="`/gallery/${post.uid}`" @click.native="scrollTo(0, 200, 0)">
-              <progressive-background class="preview-figure" :src="post.images[0]['image']['url']"/>
-              <div class="feed-card-title">
-                <h2>{{ post.title }}</h2>
-              </div>
-            </router-link>
-          </div>
-        </div>
-      </transition-group>
-    </div>
+    <transition-group name="feed-fade" tag="div" class="container feed-grid">
+      <div v-for="post in feed" :key="post.id" class="feed-card">
+          <router-link :to="`/gallery/${post.uid}`">
+            <progressive-background class="feed-card__image" :src="post.images[0]['image']['url']"/>
+            <div class="feed-card__title">
+              <h4>{{ post.title }}</h4>
+            </div>
+          </router-link>
+      </div>
+    </transition-group>
   </section>
 </template>
 
 <script>
   import ProgressiveBackground from '../components/ProgressiveBackground'
-  import {scrollTo} from '../helpers'
-  import {mapState} from 'vuex'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'gallery-feed',
@@ -70,7 +64,6 @@
     },
 
     methods: {
-      scrollTo,
       getBgImg (src) {
         return {backgroundImage: `url(${src})`}
       },

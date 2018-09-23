@@ -1,16 +1,12 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import meta from 'vue-meta'
-import App from './App'
-import * as resources from './resources'
-import resource from './plugins/resource'
+import App from './App.vue'
 import router from './router'
 import store from './store'
 
-require('web-animations-js/web-animations.min')
-
-// Vue.config.productionTip = false
+import resource from './plugins/resource'
+import * as resources from './resources'
+import meta from 'vue-meta'
+import VueMq from 'vue-mq'
 
 Vue.use(resource, {
   resources,
@@ -18,6 +14,16 @@ Vue.use(resource, {
 })
 
 Vue.use(meta)
+
+Vue.use(VueMq, {
+  breakpoints: {
+    mobile: 768,
+    tablet: 1024,
+    desktop: Infinity,
+  }
+})
+
+Vue.config.productionTip = false
 
 new Vue({
   router,

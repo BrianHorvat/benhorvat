@@ -1,15 +1,9 @@
 @charset "utf-8";
 
 @import "normalize";
-@import "~bulma";
-
-@font-face {
-  font-family: 'Dense';
-  src: url('assets/dense-regular-webfont.woff2') format('woff2'),
-  url('assets/dense-regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/base/_all.sass";
+@import "bulma/sass/elements/container.sass";
 
 // Fonts
 $base-font-family: "Lato", sans-serif;
@@ -33,7 +27,7 @@ $link-hover: hsla(215, 100%, 45%, 1);
 
 $icon-color: $font-primary;
 
-$corner-radius: 0px;
+$corner-radius: 0;
 
 // Main bg Colors
 $bg-main: #fafafa;
@@ -82,11 +76,6 @@ body {
   font-kerning: normal;
 }
 
-/*b, strong,
-h1, h2, h3, h4, h5, h6 {
-  font-weight: $bold-font-weight;
-}*/
-
 a {
   color: $link-color;
   text-decoration: none;
@@ -95,6 +84,24 @@ a {
 
   &:hover {
     color: $link-hover;
+  }
+}
+
+h1,h2,h3,h4 {
+  font-family: $accent-font-family;
+  font-variant: small-caps;
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2.25em; }
+h3 { font-size: 1.75em; }
+h4 { font-size: 1.35em; }
+
+p {
+  margin-bottom: 1em;
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -117,17 +124,9 @@ input[type=number]::-webkit-outer-spin-button {
   height: 12px;
 }
 
-::-webkit-scrollbar-track {
-  background-color: #ddd;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #999;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
-}
+::-webkit-scrollbar-track { background-color: #ddd; }
+::-webkit-scrollbar-thumb { background-color: #999; }
+::-webkit-scrollbar-thumb:hover { background-color: #777; }
 
 /**
 No script
@@ -148,7 +147,8 @@ noscript + .spinner {
 /***
  ***/
 
-@import "layout/components/header",
+@import 
+"layout/components/header",
 "layout/components/footer",
 "layout/includes/spinner",
 "layout/components/progressiveimg",

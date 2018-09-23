@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import GalleryFeed from '../pages/GalleryFeed'
-import GalleryPost from '../pages/GalleryPost'
-import GalleryContact from '../pages/GalleryContact'
-import GalleryAbout from '../pages/GalleryAbout'
+import GalleryFeed from './pages/GalleryFeed'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  linkActiveClass: 'active',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -27,17 +24,17 @@ export default new Router({
       path: '/gallery/:post',
       name: 'post',
       props: true,
-      component: GalleryPost
+      component: () => import('./pages/GalleryPost')
     },
     {
       path: '/about',
       name: 'about',
-      component: GalleryAbout
+      component: () => import('./pages/GalleryAbout')
     },
     {
       path: '/contact',
       name: 'contact',
-      component: GalleryContact
+      component: () => import('./pages/GalleryContact')
     }
   ]
 })

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="gallery">
-    <gallery-nav/>
+    <gallery-header/>
     <section class="main">
       <transition name="wipe-to">
         <router-view class="page"/>
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-  import GalleryNav from './components/GalleryNav'
+  import GalleryHeader from './components/GalleryHeader'
   import GalleryFooter from './components/GalleryFooter'
 
   export default {
     name: 'app',
     components: {
-      GalleryNav, GalleryFooter
+      GalleryHeader, GalleryFooter
     },
     resource: 'Gallery',
     metaInfo: {
@@ -32,5 +32,5 @@
 </script>
 
 <style lang="scss">
-  @import './sass/main';
+  @import './assets/sass/main.scss';
 </style>

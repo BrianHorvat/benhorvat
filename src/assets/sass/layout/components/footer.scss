@@ -24,10 +24,6 @@ footer.footer {
     margin-right: 1em;
     margin-left: $footer-inset;
 
-    @include mobile {
-      margin-left: $footer-inset-mobile;
-    }
-
     li.social-icon + li.social-icon {
       margin-left: 0.75em;
     }
