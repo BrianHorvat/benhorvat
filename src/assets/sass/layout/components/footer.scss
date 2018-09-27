@@ -3,21 +3,22 @@
  */
 
 // Footer Variables
-$footer-bg: white;
+$footer-bg: #f5f5f5;
 $footer-border: 1px solid $hr-color;
 $footer-copy-color: $font-grey;
+
 $footer-inset: 2em;
 $footer-inset-mobile: 1em;
-// ---- ///
 
 footer.footer {
-  // border-top: $footer-border;
-
   display: flex;
-  position: relative;
-  align-items: center;
+
+  background: $footer-bg;
   padding: 1em 0;
   margin-top: 1em;
+
+  position: relative;
+  align-items: center;
 
   ul.social-media {
     display: flex;
@@ -27,15 +28,23 @@ footer.footer {
     li.social-icon + li.social-icon {
       margin-left: 0.75em;
     }
+
+    @include mobile {
+      margin-left: $footer-inset-mobile;
+    }
   }
 
-  .copyright {
+  span.copyright {
     color: $footer-copy-color;
     text-align: center;
 
     display: block;
     margin-left: auto;
     margin-right: $footer-inset;
+
+    @include mobile {
+      margin-right: $footer-inset-mobile;
+    }
   }
 }
 

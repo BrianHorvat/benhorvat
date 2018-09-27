@@ -4,6 +4,7 @@
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/base/_all.sass";
 @import "bulma/sass/elements/container.sass";
+@import "bulma/sass/grid/columns.sass";
 
 // Fonts
 $base-font-family: "Lato", sans-serif;
@@ -148,17 +149,18 @@ noscript + .spinner {
  ***/
 
 @import 
-"layout/components/header",
-"layout/components/footer",
-"layout/includes/spinner",
-"layout/components/progressiveimg",
-"layout/includes/socialicon",
-"layout/layout",
-"layout/pages/feed",
-"layout/pages/post",
-"layout/pages/contact",
-"layout/pages/about",
-"layout/components/gallery",
-"layout/components/lightbox",
-"layout/transitions/feed",
-"layout/transitions/pages";
+"./layout/layout",
+"./layout/inputs",
+"./layout/includes/spinner",
+"./layout/includes/socialicon",
+"./layout/components/header",
+"./layout/components/footer",
+"./layout/components/progressiveimg",
+"./layout/components/gallery",
+"./layout/components/lightbox",
+"./layout/pages/feed",
+"./layout/pages/post",
+"./layout/pages/contact",
+"./layout/pages/about",
+"./layout/transitions/feed",
+"./layout/transitions/pages";

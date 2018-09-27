@@ -16,7 +16,7 @@ $gallery-aspect-ratio: 5 / 4;
     border-radius: $corner-radius;
     overflow: hidden;
     margin-bottom: 1em;
-    pointer: cursor;
+    cursor: pointer;
 
     padding-top: 1 / $gallery-aspect-ratio * 100%;
 
@@ -67,51 +67,37 @@ $gallery-aspect-ratio: 5 / 4;
       }
     }
 
-    .controls {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+    .action-button {
       display: flex;
-      z-index: 2;
-      transition-delay: 300ms;
-      transition: opacity 0.2s;
-      opacity: 1;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+      position: absolute;
+  
+      padding: 1em;
+  
+      transition: all 0.15s;
+  
+      cursor: pointer;
 
+      top: 0;
+      height: 100%;
+  
       svg {
-        position: relative;
-        z-index: 2;
-        width: 4em;
-        padding: 0 0.75em;
-
-        fill: rgba(255,255,255,0.35);
-        filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.4));
-
-        transition: fill 0.15s, opacity 0.2s, visibility 0.2s;
-
-        &:hover {
-          fill: rgba(255,255,255,0.8);
-          cursor: pointer;
-        }
-
-        &:active {
-          fill: white;
-        }
-
-        &#right {
-          margin-left: auto;
-        }
-
-        &.hide {
-          opacity: 0;
-          visibility: hidden;
-        }
+        width: 1.25em;
+        height: 1.25em;
+        fill: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      &:hover {
+        background-color: rgba(255,255,255,0.12);
       }
 
-      &.hide {
-        opacity: 0;
-      }
+      &#left { left: 0; }
+      &#right { right: 0; }
     }
   }
 

@@ -10,11 +10,14 @@
           <progressive-image ref="image" :src="images[index].image.url"/>
         </div>
       </div>
-      <div class="controls" :class="sliderClass">
-        <svg class="is-hidden-mobile" id="left" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" @click.stop="pageLeft" @mousedown.stop>
+
+      <div id="left" @click.stop="pageLeft" @mousedown.stop class="action-button is-hidden-mobile">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>
         </svg>
-        <svg class="is-hidden-mobile" id="right" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" @click.stop="pageRight" @mousedown.stop>
+      </div>
+      <div id="right" @click.stop="pageRight" @mousedown.stop class="action-button is-hidden-mobile">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>
         </svg>
       </div>

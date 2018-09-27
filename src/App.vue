@@ -22,7 +22,7 @@
     resource: 'Gallery',
     metaInfo: {
       title: 'Unknown',
-      titleTemplate: '%s | Ben Horvat Photography'
+      titleTemplate: '%s | Benjamin Horvat Photography'
     },
     beforeMount () {
       this.$getResource('gallery').then(gallery => { this.$store.commit('meta', gallery) })

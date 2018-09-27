@@ -8,10 +8,17 @@
           </svg>
         </a>
       </transition>
-      <mq-layout mq="mobile" class="nav-bar mobile">
-
+      <mq-layout :mq="['mobile', 'tablet']" class="nav-bar mobile">
+        <div class="nav-line"></div>
+        <div class="nav-item site-title">
+          <router-link to="/" @click.native="menuClose">
+            <span>Benjamin Horvat</span>
+            <span>Photography</span>
+          </router-link>
+        </div>
+        <div class="nav-line"></div>
       </mq-layout>
-      <mq-layout mq="tablet+" class="nav-bar desktop">
+      <mq-layout mq="desktop+" class="nav-bar desktop">
         <div class="nav-line"></div>
         <div class="nav-menu left" :class="menuClass">
           <div v-for="sort in sorts" :key="sort.uid" class="nav-item" >
@@ -27,12 +34,12 @@
           </router-link>
         </div>
         <div class="nav-menu right" :class="menuClass">
-          <div class="nav-item">
+          <div class="nav-item has-dropdown">
             <span>Info</span>
             <div class="nav-dropdown">
-              <router-link :to="{name: 'about'}" @click.native="menuClose">About</router-link>
-              <router-link :to="{name: 'about'}" @click.native="menuClose">The Process</router-link>
-              <router-link :to="{name: 'about'}" @click.native="menuClose">Testimonials</router-link>
+              <router-link :to="{name: 'about'}" @click.native="menuClose">About Me</router-link>
+              <router-link :to="{name: 'process'}" @click.native="menuClose">The Process</router-link>
+              <router-link :to="{name: 'testimonials'}" @click.native="menuClose">Testimonials</router-link>
             </div>
             
           </div>

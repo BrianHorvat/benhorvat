@@ -8,70 +8,70 @@
             Interested in working together? You may contact me directly at <a :href="email">{{ meta.social.email }}</a>, or by using the form below.
           </p>
           <form class="contact-form" method="POST" :action="'https://formspree.io/' + meta.social.email">
-            <div class="contact-form__field">
-              <span class="contact-form__field-label">First Name</span>
-              <div class="contact-form__field-item">
+            <div class="field">
+              <span class="field-label">First Name</span>
+              <div class="field-item">
                 <input name="first_name" type="text" placeholder="Jane" required />
               </div>
             </div>
-            <div class="contact-form__field">
-                <span class="contact-form__field-label">Last Name</span>
-                <div class="contact-form__field-item">
+            <div class="field">
+                <span class="field-label">Last Name</span>
+                <div class="field-item">
                   <input name="last_name" type="text" placeholder="Doe" required/>
               </div>
             </div>
 
-            <div class="contact-form__field contact-form__field--full-width">
-              <span class="contact-form__field-label">Phone Number</span>
-              <div class="contact-form__field-item">
+            <div class="field full-width">
+              <span class="field-label">Phone Number</span>
+              <div class="field-item">
                 <input name="phone" type="tel" placeholder="(123) 456-7890" required />
               </div>
             </div>
 
-            <div class="contact-form__field contact-form__field--full-width">
-              <span class="contact-form__field-label">Email</span>
-              <div class="contact-form__field-item">
+            <div class="field full-width">
+              <span class="field-label">Email</span>
+              <div class="field-item">
                 <input name="email" type="email" placeholder="your@email.com" required />
               </div>
             </div>
 
-            <div class="contact-form__field contact-form__field--full-width">
-              <span class="contact-form__field-label">Type of Photography</span>
-              <div class="contact-form__field-item">
+            <div class="field full-width">
+              <span class="field-label">Type of Photography</span>
+              <div class="field-item">
                 <input name="type" type="text" placeholder="Portraits, Senior Portraits, Branding..." required />
               </div>
             </div>
 
-            <div class="contact-form__field contact-form__field--full-width">
-              <span class="contact-form__field-label">Date of Photography</span>
-              <p class="contact-form__field-desc">To help make scheduling your session as easy as possible, please give a range of possible dates.</p>
-              <div class="contact-form__field-item">
+            <div class="field full-width">
+              <span class="field-label">Date of Photography</span>
+              <p class="field-desc">To help make scheduling your session as easy as possible, please give a range of possible dates.</p>
+              <div class="field-item">
                 <input name="date" type="text" placeholder="January 1st, 2020 - January 10th, 2020" required />
               </div>
             </div>
 
-            <div class="contact-form__field contact-form__field--full-width">
-              <span class="contact-form__field-label">Location of Photography</span>
-              <p class="contact-form__field-desc">If you would like an on location session, please give a full address and any relevant details in the comments section.</p>
-              <div class="contact-form__field-item">
-                <input name="date" type="text" placeholder="In Studio, On Location" required />
+            <div class="field full-width">
+              <span class="field-label">Location of Photography</span>
+              <p class="field-desc">If you would like an on location session, please give a full address and any relevant details in the comments section.</p>
+              <div class="field-item">
+                <input type="radio" name="location" checked/>
               </div>
             </div>
 
-            <div class="contact-form__field contact-form__field--full-width">
-              <span class="contact-form__field-label">Additional Comments</span>
-              <p class="contact-form__field-desc">Please include any special requests and notes pertinent to your session. </p>
-              <div class="contact-form__field-item">
+            <div class="field full-width">
+              <span class="field-label">Additional Comments</span>
+              <p class="field-desc">Please include any special requests and notes pertinent to your session. </p>
+              <div class="field-item">
                 <textarea name="comments" placeholder="Number of people to be photographed, location details, etc." required></textarea>
               </div>
             </div>
 
-            <div class="contact-form__field contact-form__field--full-width">
+            <div class="field full-width">
               <button type="submit">Send</button>
             </div>
           </form>
         </div>
-        <div class="column is-one-quarter">
+        <div class="column is-2">
           <h1>Social</h1>
           <ul class="social-media">
             <li class="social-icon" id="email">
@@ -127,9 +127,6 @@
       ...mapState([
         'meta'
       ]),
-      formInput () {
-        return 'test'
-      },
       instagram () {
         return 'https://instagram.com/' + this.meta.social.instagram
       },

@@ -35,6 +35,16 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: () => import('./pages/GalleryContact')
+    },
+    {
+      path: '/testimonials',
+      name: 'testimonials',
+      component: () => import('./pages/GalleryTestimonials')
+    },
+    {
+      path: '/process',
+      name: 'process',
+      component: () => import('./pages/GalleryProcess')
     }
   ]
 })

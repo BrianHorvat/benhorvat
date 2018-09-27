@@ -18,13 +18,14 @@ $header-title-bg-focus: rgba(0, 0, 0, 0.12);
 $header-border-width: 0.125rem;
 $header-border-color: rgba(255,255,255,0.3);
 
-$header-dropdown-bg: grey;
+$header-dropdown-bg: #9f9c9a;
+$header-dropdown-shadow: drop-shadow(1px 2px 9px rgba(0,0,0,0.2));
 
 .header {
   display: flex;
   align-items: center;
 
-  background: url('/assets/Shrunk-min.png') $header-bg;
+  background: url('./assets/Shrunk-min.png') $header-bg;
   background-size: cover;
   background-position: center;
 
@@ -47,16 +48,17 @@ $header-dropdown-bg: grey;
       position: relative;
 
       a, span {
+        color: $header-font-color;
         font-variant: small-caps;
         padding: 1em;
         transition: background 0.2s;
-
-        &, &:visited, &:hover, &:focus { color: $header-font-color; }
-        &:hover { background: $header-title-bg-hover; }
-        &:focus { background: $header-title-bg-focus; }
       }
 
       a {
+        &:visited, &:hover, &:focus { color: $header-font-color; }
+        &:hover { background: $header-title-bg-hover; }
+        &:focus { background: $header-title-bg-focus; }
+
         &:after {
           content: "";
 
@@ -71,6 +73,7 @@ $header-dropdown-bg: grey;
 
           transition-property: width, background, left;
           transition-duration: 0.2s;
+
         }
         &.router-link-exact-active:after {
           left: 0;
@@ -78,10 +81,11 @@ $header-dropdown-bg: grey;
           background: $header-border-color;
         }
       }
+    }
 
-      span {
-        cursor: default;
-      }
+    .nav-item.has-dropdown {
+      span { cursor: default; }
+      &:hover span { background: $header-title-bg-hover; }
 
       &:hover {
         .nav-dropdown {
@@ -98,12 +102,14 @@ $header-dropdown-bg: grey;
       position: absolute;
       top: 100%;
       width: 100%;
-      z-index: 1;
+      z-index: 9999;
 
       visibility: hidden;
       opacity: 0;
 
       background: $header-dropdown-bg;
+      filter: $header-dropdown-shadow;
+      transition: all 0.15s;
     }
 
     .nav-item.site-title {
@@ -119,7 +125,11 @@ $header-dropdown-bg: grey;
         margin: 1em 0;
         padding: 1em;
   
-        span { display: block; padding: 0; }
+        span { 
+          display: block;
+          padding: 0;
+          white-space: nowrap; 
+        }
         &:after { display: none !important; }
       }
 

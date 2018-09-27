@@ -107,8 +107,7 @@ $drop-shadow: drop-shadow(0px 0px 6px black);
     padding: 1em;
     opacity: 0;
 
-    will-change: padding, width, opacity;
-    transition: opacity 0.3s, background-color 0.2s;
+    transition: all 0.15s;
 
     cursor: pointer;
 
@@ -124,23 +123,15 @@ $drop-shadow: drop-shadow(0px 0px 6px black);
     &:hover {
       background-color: rgba(255,255,255,0.12);
     }
-  }
 
-  #close {
-    top: 0;
-    left: 0;
-    z-index: 4;
-  }
-
-  #left, #right {
-    height: 80%;
-  }
-
-  #left {
-    left: 0;
-  }
-
-  #right {
-    right: 0;
+    &#close {
+      top: 0;
+      left: 0;
+      z-index: 4;
+    }
+  
+    &#left, &#right { height: 80%; }
+    &#left { left: 0; }
+    &#right { right: 0; }
   }
 }

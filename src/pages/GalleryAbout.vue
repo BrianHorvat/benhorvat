@@ -3,11 +3,11 @@
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-half">
-          <h1>About</h1>
+          <h1>About Me</h1>
           <div class="about-content" v-html="about.content"></div>
         </div>
-        <div class="column is-2">
-          <img v-bind:src="about.picture"/>
+        <div class="column is-2 profile-pic">
+          <img :src="about.picture"/>
           <h4>Ben</h4>
         </div>
       </div>
@@ -23,19 +23,7 @@
     resource: 'GalleryAbout',
 
     computed: {
-      ...mapState([
-        'meta',
-        'about'
-      ]),
-      instagram () {
-        return 'https://instagram.com/' + this.meta.social.instagram
-      },
-      facebook () {
-        return 'https://facebook.com/' + this.meta.social.facebook
-      },
-      email () {
-        return 'mailto:' + this.meta.social.email
-      }
+      ...mapState(['about'])
     },
     metaInfo: {
       title: 'About'
