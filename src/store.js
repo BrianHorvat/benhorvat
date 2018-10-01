@@ -22,7 +22,8 @@ export default new Vuex.Store({
     about: {
       content: '',
       picture: ''
-    }
+    },
+    testimonials: {}
   },
   mutations: {
     sorts (state, payload) {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     about (state, payload) {
       state.about = payload
+    },
+    testimonials (state, payload) {
+      state.testimonials = payload
     }
   }
 })

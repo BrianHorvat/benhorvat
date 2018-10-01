@@ -1,0 +1,18 @@
+.page.testimonials {
+    .testimonials-list {
+        .testimonial {
+            display: flex;
+
+            .testimonial-picture {
+                width: 8em;
+                height: 8em;
+                object-fit: cover;
+            }
+
+            .testimonial-description {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
