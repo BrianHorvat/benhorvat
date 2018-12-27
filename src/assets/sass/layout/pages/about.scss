@@ -1,9 +1,15 @@
-.page.about .profile-pic {
-  img {
-    filter: drop-shadow(1px 2px 6px rgba(0,0,0,0.1));
+.page.about {
+
+  .profile-picture {
+    padding-bottom: 100%;
+
+    img {
+      filter: drop-shadow(1px 2px 6px rgba(0,0,0,0.1));
+    }
   }
 
-  h4 {
+  h4.profile-name {
     text-align: center;
   }
 }
+

@@ -12,6 +12,10 @@ $card-shadow-hover: drop-shadow(1px 2px 9px rgba(0,0,0,0.2));
   grid-gap: 1em;
 }
 
+.feed-category {
+  margin-bottom: 1em;
+}
+
 .feed-card {
   background-color: $card-background;
   filter: $card-shadow;
