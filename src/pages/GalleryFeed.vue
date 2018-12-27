@@ -1,15 +1,20 @@
 <template>
-  <section class="feed left">
-    <transition-group name="feed-fade" tag="div" class="container feed-grid">
-      <div v-for="post in feed" :key="post.id" class="feed-card">
-          <router-link :to="`/gallery/${post.uid}`">
-            <progressive-background class="feed-card__image" :src="post.images[0]['image']['url']"/>
-            <div class="feed-card__title">
-              <h4>{{ post.title }}</h4>
-            </div>
-          </router-link>
+  <section class="feed left container">
+    <div v-for="section in feed" :key="section.category.id" class="feed-category">
+      <h2>{{ section.category.title }}</h2>
+      <div class="columns is-multiline is-mobile is-centered">
+        <div v-for="post in section.posts" :key="post.id" class="column is-one-third-tablet is-half-mobile is-centered">
+          <div class="feed-card">
+            <router-link :to="`/gallery/${post.uid}`">
+              <progressive-background class="feed-card__image" :src="post.images[0]['image']['url']"/>
+              <div class="feed-card__title">
+                <h4>{{ post.title }}</h4>
+              </div>
+            </router-link>
+          </div>
+        </div>
       </div>
-    </transition-group>
+    </div>
   </section>
 </template>
 
@@ -30,31 +35,12 @@
     },
 
     computed: {
-      filters () {
-        let filters = {}
-
-        if (this.category) {
-          filters.tags = this.sorts[this.category] ? this.sorts[this.category].tags : []
-        } else {
-          filters.main = true
-        }
-
-        return filters
-      },
-      feed () {
-        const filterBy = {
-          tags: (filter, post) => {
-            return post.tags.some(r => filter.includes(r))
-          },
-          main: (filter, post) => {
-            return post.hideFront !== filter
+      feed() {
+        return this.sorts.map(category => {
+          return {
+            category,
+            posts: this.posts.filter(post => post.tags.some(postTag => category.tags.indexOf(postTag) !== -1))
           }
-        }
-
-        return this.posts.filter(post => {
-          return Object.keys(this.filters).every(filter => {
-            return filterBy[filter](this.filters[filter], post)
-          })
         })
       },
       ...mapState([
@@ -64,19 +50,6 @@
     },
 
     methods: {
-      getBgImg (src) {
-        return {backgroundImage: `url(${src})`}
-      },
-      stackPosts (posts) {
-        let interval
-        const stack = () => {
-          this.posts.push(posts.shift())
-          if (!posts.length) {
-            clearInterval(interval)
-          }
-        }
-        interval = setInterval(stack, 125)
-      }
     },
 
     beforeMount () {

@@ -5,7 +5,7 @@ export default {
     return {
       predicate: prismic.Predicates.at('document.type', 'home'),
       resolve: (response, mappers) => {
-        let data = response.results[0].data
+        const data = response.results[0].data
         return Promise.resolve({
           title: data.title,
           metaTitle: data.page_title,
@@ -24,20 +24,13 @@ export default {
     return {
       predicate: prismic.Predicates.at('document.type', 'sort'),
       resolve: (response, mappers) => {
-        let sorts = {}
-        Object.keys(response['results']).forEach(key => {
-          let sort = response['results'][key]
-          let mapped = {
+        return Promise.resolve(Object.values(response['results']).map(sort => {
+          return {
             uid: sort['uid'],
             title: sort['data']['title'],
-            tags: []
+            tags: sort['data']['tags'].map(tagObj => tagObj['tag'])
           }
-          sort['data']['tags'].forEach(e => {
-            mapped.tags.push(e.tag)
-          })
-          sorts[mapped.uid] = mapped
-        })
-        return Promise.resolve(sorts)
+        }))
       }
     }
   }
