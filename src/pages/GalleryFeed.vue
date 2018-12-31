@@ -1,12 +1,15 @@
 <template>
-  <section class="feed left container">
-    <div v-for="section in feed" :key="section.category.id" class="feed-category">
+  <transition-group tag="section" class="feed container" name="feed">
+    <div v-for="section in feed" :key="section.category.uid" class="feed-category">
       <h2>{{ section.category.title }}</h2>
-      <div class="columns is-multiline is-mobile is-centered">
-        <div v-for="post in section.posts" :key="post.id" class="column is-one-third-tablet is-half-mobile is-centered">
+      <div class="feed-grid">
+        <div v-for="post in section.posts" :key="post.id" class>
           <div class="feed-card">
-            <router-link :to="`/gallery/${post.uid}`">
-              <progressive-background class="feed-card__image" :src="post.images[0]['image']['url']"/>
+            <router-link :to="{name: 'post', params: {post: post.uid}}">
+              <progressive-background
+                class="feed-card__image"
+                :src="post.images[0]['image']['url']"
+              />
               <div class="feed-card__title">
                 <h4>{{ post.title }}</h4>
               </div>
@@ -15,55 +18,49 @@
         </div>
       </div>
     </div>
-  </section>
+  </transition-group>
 </template>
 
 <script>
-  import ProgressiveBackground from '../components/ProgressiveBackground'
-  import { mapState } from 'vuex'
+import ProgressiveBackground from '../components/ProgressiveBackground'
+import { mapState } from 'vuex'
 
-  export default {
-    name: 'gallery-feed',
-    resource: 'GalleryFeed',
-    components: {ProgressiveBackground},
+export default {
+  name: 'gallery-feed',
+  resource: 'GalleryFeed',
+  components: { ProgressiveBackground },
 
-    props: {
-      category: {
-        type: String,
-        default: ''
-      }
-    },
-
-    computed: {
-      feed() {
-        return this.sorts.map(category => {
-          return {
-            category,
-            posts: this.posts.filter(post => post.tags.some(postTag => category.tags.indexOf(postTag) !== -1))
-          }
-        })
-      },
-      ...mapState([
-        'sorts',
-        'posts'
-      ])
-    },
-
-    methods: {
-    },
-
-    beforeMount () {
-      this.$getResource('feed').then(feed => {
-        let posts = feed.sort(function (a, b) {
-          return b.order - a.order
-        })
-
-        this.$store.commit('posts', posts)
+  computed: {
+    feed() {
+      return this.sorts.filter(sort => {
+        if (this.$route.params.category) {
+          return this.$route.params.category === sort.uid
+        } else {
+          return true
+        }
+      }).map(category => {
+        return {
+          category,
+          posts: this.posts.filter(post =>
+            post.tags.some(postTag => category.tags.indexOf(postTag) !== -1)
+          )
+        }
       })
     },
+    ...mapState({
+      posts: state => state.feed.posts,
+      sorts: state => state.gallery.sorts
+    })
+  },
 
-    metaInfo: {
-      title: 'Gallery'
-    }
+  methods: {},
+
+  created() {
+    this.$store.dispatch('feed/getFeed')
+  },
+
+  metaInfo: {
+    title: 'Gallery'
   }
+}
 </script>

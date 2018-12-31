@@ -66,10 +66,10 @@
     },
 
     computed: {
-      ...mapState([
-        'meta',
-        'sorts'
-      ]),
+      ...mapState({
+        meta: state => state.gallery.meta,
+        sorts: state => state.gallery.sorts
+      }),
       menuClass () {
         return {
           'menu-active': this.menuActive

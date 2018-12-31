@@ -1,74 +1,55 @@
 <template>
   <section class="post right">
-    <div v-if="post" class="container">
-        <div class="columns is-centered">
-          <div v-if="description" class="column is-one-third">
-            <h1>{{ title }}</h1>
-            <div class="post-desc" v-html="description"></div>
-          </div>
-          <div class="column is-two-thirds">
-            <h1 v-if="!description">{{ title }}</h1>
-            <image-gallery :images="images" :aspectRatio="0.75">asdsad</image-gallery>
-          </div>
+    <div v-if="!loading" class="container">
+      <div class="columns is-centered">
+        <div v-if="post.description" class="column is-one-third">
+          <h1>{{ post.title }}</h1>
+          <div class="post-desc" v-html="post.description"></div>
         </div>
+        <div class="column is-two-thirds">
+          <h1 v-if="!post.description">{{ post.title }}</h1>
+          <image-gallery :images="post.images" :aspectRatio="0.75"></image-gallery>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-  import {kebabify, prettyDate} from '../helpers'
-  import ImageGallery from '../components/ImageGallery.vue'
+import ImageGallery from "../components/ImageGallery.vue"
+import { mapGetters } from 'vuex'
 
-  function defaultData () {
+export default {
+  name: "gallery-post",
+  components: { ImageGallery },
+  data() {
     return {
-      title: '',
-      content: '',
-      published: '',
-      description: ' ',
-      images: [],
-      order: 0
+      loading: true,
+      error: null
+    }
+  },
+  computed: {
+    post() {
+      return this.$store.getters['feed/getPost'](this.$route.params.post)
+    }
+  },
+  watch: {
+    $route: "fetchData"
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      this.loading = true
+
+      this.$store.dispatch("feed/getFeed").then(() => this.loading = false)
+    }
+  },
+  metaInfo() {
+    return {
+      title: this.loading ? "Loading" : this.post.title
     }
   }
-
-  export default {
-    name: 'gallery-post',
-    components: {ImageGallery},
-    resource: 'GalleryPost',
-    props: {post: String},
-
-    data () {
-      return defaultData()
-    },
-
-    computed: {},
-
-    watch: {
-      post (to, from) {
-        if (to === from || !this.post) return
-
-        this.resetData()
-        this.$getResource('post', to)
-      }
-    },
-
-    methods: {
-      kebabify,
-      prettyDate,
-      resetData () {
-        Object.assign(this.$data, defaultData())
-      }
-    },
-
-    beforeMount () {
-      if (!this.post) return
-
-      this.$getResource('post', this.post)
-    },
-
-    metaInfo () {
-      return {
-        title: this.title ? this.title : 'Loading'
-      }
-    }
-  }
+}
 </script>
