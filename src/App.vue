@@ -11,26 +11,26 @@
 </template>
 
 <script>
-  import GalleryHeader from './components/GalleryHeader'
-  import GalleryFooter from './components/GalleryFooter'
+import GalleryHeader from './components/GalleryHeader'
+import GalleryFooter from './components/GalleryFooter'
 
-  export default {
-    name: 'app',
-    components: {
-      GalleryHeader, GalleryFooter
-    },
-    resource: 'Gallery',
-    metaInfo: {
-      title: 'Unknown',
-      titleTemplate: '%s | Benjamin Horvat Photography'
-    },
-    beforeMount () {
-      this.$getResource('gallery').then(gallery => { this.$store.commit('meta', gallery) })
-      this.$getResource('sorts').then(sorts => { this.$store.commit('sorts', sorts) })
-    }
+export default {
+  name: 'app',
+  components: {
+    GalleryHeader, GalleryFooter
+  },
+  resource: 'Gallery',
+  metaInfo: {
+    title: 'Unknown',
+    titleTemplate: '%s | Benjamin Horvat Photography'
+  },
+  beforeMount() {
+    this.$store.dispatch('gallery/getMeta')
+    this.$store.dispatch('gallery/getSorts')
   }
+}
 </script>
 
 <style lang="scss">
-  @import './assets/sass/main.scss';
+@import "./assets/sass/main.scss";
 </style>

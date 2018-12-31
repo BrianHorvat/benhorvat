@@ -7,8 +7,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'home',
       props: true,
@@ -23,7 +22,6 @@ export default new Router({
     {
       path: '/gallery/:post',
       name: 'post',
-      props: true,
       component: () => import('./pages/GalleryPost')
     },
     {
@@ -46,5 +44,15 @@ export default new Router({
       name: 'process',
       component: () => import('./pages/GalleryProcess')
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {
+        x: 0,
+        y: 0
+      }
+    }
+  }
 })
