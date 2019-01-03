@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import info from './modules/info'
 import feed from './modules/feed'
 import gallery from './modules/gallery'
+import contact from './modules/contact'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ export default new Vuex.Store({
   modules: {
     info,
     feed,
-    gallery
+    gallery,
+    contact
   },
   strict: debug
 })
