@@ -2,7 +2,7 @@
   <footer class="footer">
     <ul class="social-media">
       <li class="social-icon">
-        <a :href="this.$store.getters['gallery/phoneLink']">
+        <a :href="this.$store.getters['gallery/instagramLink']">
           <icon-base icon-name="Instagram">
             <icon-instagram/>
           </icon-base>
@@ -10,7 +10,7 @@
         </a>
       </li>
       <li class="social-icon">
-        <a :href="this.$store.getters['gallery/phoneLink']">
+        <a :href="this.$store.getters['gallery/facebookLink']">
           <icon-base icon-name="Facebook">
             <icon-facebook/>
           </icon-base>
@@ -18,7 +18,7 @@
         </a>
       </li>
       <li class="social-icon">
-        <a :href="this.$store.getters['gallery/phoneLink']">
+        <a :href="this.$store.getters['gallery/emailLink']">
           <icon-base icon-name="Email">
             <icon-email/>
           </icon-base>
