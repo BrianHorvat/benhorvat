@@ -18,7 +18,25 @@ const state = {
   sorts: []
 }
 
-const getters = {}
+const getters = {
+  prettyPhone(state) {
+    const s2 = state.meta.social.phone.replace(/\D/g, '')
+    const m = s2.match(/^(\d{3})(\d{3})(\d{4})$/)
+    return (!m) ? null : '(' + m[1] + ') ' + m[2] + '-' + m[3]
+  },
+  instagramLink(state) {
+    return 'https://instagram.com/' + state.meta.social.instagram
+  },
+  facebookLink(state) {
+    return 'https://facebook.com/' + state.meta.social.facebook
+  },
+  emailLink(state) {
+    return 'mailto:' + state.meta.social.email
+  },
+  phoneLink(state) {
+    return 'tel:' + state.meta.social.phone
+  }
+}
 
 const actions = {
   getMeta({
