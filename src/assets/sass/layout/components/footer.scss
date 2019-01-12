@@ -12,6 +12,7 @@ $footer-inset-mobile: 1em;
 
 footer.footer {
   display: flex;
+  flex-direction: column;
 
   background: $footer-bg;
   padding: 1em 0;
@@ -19,18 +20,15 @@ footer.footer {
 
   position: relative;
   align-items: center;
+  justify-content: center;
 
   ul.social-media {
     display: flex;
-    margin-right: 1em;
-    margin-left: $footer-inset;
+    justify-content: center;
+    margin: 1em 0;
 
-    li.social-icon + li.social-icon {
-      margin-left: 0.75em;
-    }
-
-    @include mobile {
-      margin-left: $footer-inset-mobile;
+    li.social-icon {
+      margin: 0 0.5em;
     }
   }
 
@@ -39,12 +37,7 @@ footer.footer {
     text-align: center;
 
     display: block;
-    margin-left: auto;
-    margin-right: $footer-inset;
-
-    @include mobile {
-      margin-right: $footer-inset-mobile;
-    }
+    margin: 1em 0;
   }
 }
 
