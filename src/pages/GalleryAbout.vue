@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section id="about">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-half">
@@ -26,7 +26,7 @@ export default {
 
   computed: {
     ...mapState({
-      about: state => state.about.data
+      about: state => state.info.about
     })
   },
 
