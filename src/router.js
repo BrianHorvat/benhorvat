@@ -11,39 +11,60 @@ export default new Router({
       path: '/',
       name: 'home',
       props: true,
-      component: GalleryFeed
+      component: GalleryFeed,
+      meta: {
+        depth: 0
+      }
     },
     {
       path: '/sort/:category',
       name: 'category',
       props: true,
-      component: GalleryFeed
+      component: GalleryFeed,
+      meta: {
+        depth: 1
+      }
     },
     {
       path: '/gallery/:post',
       name: 'post',
-      component: () => import('./pages/GalleryPost')
+      component: () => import('./pages/GalleryPost'),
+      meta: {
+        depth: 1.1
+      }
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('./pages/GalleryAbout')
-    },
-    {
-      path: '/contact',
-      name: 'contact',
-      component: () => import('./pages/GalleryContact')
+      component: () => import('./pages/GalleryAbout'),
+      meta: {
+        depth: 2
+      }
     },
     {
       path: '/testimonials',
       name: 'testimonials',
-      component: () => import('./pages/GalleryTestimonials')
+      component: () => import('./pages/GalleryTestimonials'),
+      meta: {
+        depth: 3
+      }
     },
     {
       path: '/process',
       name: 'process',
-      component: () => import('./pages/GalleryProcess')
-    }
+      component: () => import('./pages/GalleryProcess'),
+      meta: {
+        depth: 4
+      }
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('./pages/GalleryContact'),
+      meta: {
+        depth: 5
+      }
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

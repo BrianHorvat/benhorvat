@@ -2,7 +2,7 @@
   <div id="app" class="gallery">
     <gallery-header/>
     <section class="main">
-      <transition name="wipe-to">
+      <transition :name="pageTransition">
         <router-view class="page"/>
       </transition>
     </section>
@@ -27,6 +27,18 @@ export default {
   beforeMount() {
     this.$store.dispatch('gallery/getMeta')
     this.$store.dispatch('gallery/getSorts')
+  },
+  data() {
+    return {
+      pageTransition: ''
+    }
+  },
+  watch: {
+    '$route'(to, from) {
+      const toDepth = to.meta.depth
+      const fromDepth = from.meta.depth
+      this.pageTransition = toDepth < fromDepth ? 'wipe-left' : 'wipe-right'
+    }
   }
 }
 </script>
