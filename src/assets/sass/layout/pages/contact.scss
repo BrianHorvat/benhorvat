@@ -9,10 +9,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1em;
-  
+
     .field {
       .field-desc {
         color: $font-grey;
+        margin-bottom: 0.5em;
       }
 
       &.full-width {
