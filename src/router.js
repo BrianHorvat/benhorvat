@@ -42,19 +42,19 @@ export default new Router({
       }
     },
     {
-      path: '/testimonials',
-      name: 'testimonials',
-      component: () => import('./pages/GalleryTestimonials'),
-      meta: {
-        depth: 3
-      }
-    },
-    {
       path: '/process',
       name: 'process',
       component: () => import('./pages/GalleryProcess'),
       meta: {
-        depth: 4
+        depth: 2.1
+      }
+    },
+    {
+      path: '/testimonials',
+      name: 'testimonials',
+      component: () => import('./pages/GalleryTestimonials'),
+      meta: {
+        depth: 2.2
       }
     },
     {
@@ -62,7 +62,7 @@ export default new Router({
       name: 'contact',
       component: () => import('./pages/GalleryContact'),
       meta: {
-        depth: 5
+        depth: 3
       }
     },
   ],
