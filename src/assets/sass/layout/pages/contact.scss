@@ -5,20 +5,19 @@
     }
   }
 
-  .contact-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1em;
+  .contact-date-row {
+    display: flex;
+    align-items: center;
 
-    .field {
-      .field-desc {
-        color: $font-grey;
-        margin-bottom: 0.5em;
-      }
+    margin-bottom: 0.5em;
 
-      &.full-width {
-        grid-column: 1 / span 2;
-      }
+    .field-item {
+      flex-grow: 1;
+      margin-right: 0.5em;
+    }
+
+    input[type=text] {
+      display: none;
     }
   }
 }

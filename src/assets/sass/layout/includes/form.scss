@@ -1,15 +1,17 @@
-  .form {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 1em;
+.form {
+    .field {
+        .field-desc {
+            color: $font-grey;
+        }
 
-      .field {
-          .field-desc {
-              color: $font-grey;
-          }
+        &.full-width {
+            grid-column: 1 / span 2;
+        }
+    }
 
-          &.full-width {
-              grid-column: 1 / span 2;
-          }
-      }
-  }
+    &-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1em;
+    }
+}
