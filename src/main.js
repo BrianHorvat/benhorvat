@@ -1,21 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
-// import resource from './plugins/resource'
-// import * as resources from './resources'
-
-import meta from 'vue-meta'
-import VueMq from 'vue-mq'
-
 import store from './store/'
 
-// Vue.use(resource, {
-//   resources,
-//   endpoint: 'https://benhorvat.prismic.io/api/v2'
-// })
+import VueMeta from 'vue-meta'
+import VueMq from 'vue-mq'
 
-Vue.use(meta)
+Vue.use(VueMeta)
 
 Vue.use(VueMq, {
   breakpoints: {
