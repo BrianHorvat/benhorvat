@@ -2,6 +2,10 @@ import prismicAPI from '../../api/prismic'
 import prismic from 'prismic-javascript'
 import prismicDOM from 'prismic-dom'
 
+import {
+  linkResolver
+} from './linkResolver'
+
 // initial state
 const state = {
   posts: [],
@@ -31,13 +35,13 @@ const actions = {
                 uid: post.uid,
                 title: post.data.gallery_name,
                 published: post.last_publication_date,
-                images: post.data.images,
+                images: post.data.images.map(image_wrapper => {
+                  return image_wrapper.image
+                }),
                 order: post.data.order,
                 tags: post.tags,
                 hideFront: post.data.hide === 'true',
-                description: prismicDOM.RichText.asHtml(post.data.gallery_description, doc => {
-                  if (doc.type === 'gallery') return '/gallery/' + doc.uid
-                })
+                description: prismicDOM.RichText.asHtml(post.data.gallery_description, linkResolver)
               }
             })
             .sort((a, b) => b.order - a.order)

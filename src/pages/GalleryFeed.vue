@@ -8,7 +8,7 @@
             <router-link :to="{name: 'post', params: {post: post.uid}}">
               <progressive-background
                 class="feed-card__image"
-                :src="post.images[0]['image']['url']"
+                :src="post.images[0]['url']"
               />
               <div class="feed-card__title">
                 <h4>{{ post.title }}</h4>
