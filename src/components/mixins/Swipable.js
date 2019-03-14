@@ -10,8 +10,9 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
+      draggable: true,
       dragging: false,
       dragOffsetX: 0,
       dragOffsetY: 0,
@@ -22,7 +23,8 @@ export default {
   },
 
   methods: {
-    handleMousedown (e) {
+    handleMousedown(e) {
+      if (!this.draggable) return
       if (e.which !== 1 && !e.touches) return
       if (!e.touches) {
         e.preventDefault()
@@ -33,7 +35,7 @@ export default {
       this.dragStartY = e.touches ? e.touches[0].clientY : e.clientY
       this.dragStartT = Date.now()
     },
-    handleMousemove (e) {
+    handleMousemove(e) {
       if (!this.dragging) return
 
       // Calculate deltas
@@ -42,7 +44,7 @@ export default {
       this.dragOffsetX = (this.dragStartX - eventX)
       this.dragOffsetY = (this.dragStartY - eventY)
     },
-    handleMouseup (e) {
+    handleMouseup(e) {
       if (!this.dragging) return
 
       if (this.dragOffsetX > this.minSwipeDistance) {
@@ -63,27 +65,27 @@ export default {
 
       this.handleMousecancel()
     },
-    handleMousecancel (e) {
+    handleMousecancel(e) {
       this.dragging = false
       this.dragOffsetX = 0
       this.dragOffsetY = 0
       this.dragStartT = 0
     },
 
-    handleTouchdown (e) {
+    handleTouchdown(e) {
       this.handleMousedown(e)
       e.preventDefault()
     },
-    handleTouchup (e) {
+    handleTouchup(e) {
       this.handleMouseup(e)
       e.preventDefault()
     },
-    handleTouchmove (e) {
+    handleTouchmove(e) {
       this.handleMousemove(e)
       e.preventDefault()
     },
 
-    bindSwipe (elem) {
+    bindSwipe(elem) {
       elem.addEventListener('mousedown', this.handleMousedown)
       elem.addEventListener('mouseup', this.handleMouseup)
       elem.addEventListener('mousemove', this.handleMousemove)
