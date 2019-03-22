@@ -5,11 +5,10 @@
       :refElem="this.$refs.image ? this.$refs.image[active].$refs.main : null"
       :images="images"
       :active="active"
-      :width="width"
       v-on:open="lightbox = true"
       v-on:close="lightbox = false"
-      v-on:pageLeft="pageLeft"
-      v-on:pageRight="pageRight"
+      v-on:page-left="pageLeft"
+      v-on:page-right="pageRight"
     />
     <div class="main-container" ref="mainimg">
       <div class="images" id="images" :style="sliderStyle" :class="sliderClass">
@@ -19,9 +18,9 @@
       </div>
 
       <div id="left" @click.stop="pageLeft" @mousedown.stop class="action-button is-hidden-mobile">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>
-        </svg>
+        <icon-base icon-name="Previous Image">
+          <icon-left/>
+        </icon-base>
       </div>
       <div
         id="right"
@@ -29,9 +28,9 @@
         @mousedown.stop
         class="action-button is-hidden-mobile"
       >
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>
-        </svg>
+        <icon-base icon-name="Next Image">
+          <icon-right/>
+        </icon-base>
       </div>
       <div class="bg"></div>
     </div>
@@ -53,11 +52,15 @@ import Lightbox from './Lightbox.vue'
 import ProgressiveImage from './ProgressiveImage.vue'
 import ProgressiveBackground from './ProgressiveBackground'
 import Swipable from './mixins/Swipable'
+import IconBase from '../components/icons/IconBase'
+import IconLeft from '../components/icons/IconLeft'
+import IconRight from '../components/icons/IconRight'
+import IconFullscreen from '../components/icons/IconFullscreen'
 
 export default {
   name: 'image-gallery',
   mixins: [Swipable],
-  components: { Lightbox, ProgressiveImage, ProgressiveBackground },
+  components: { Lightbox, ProgressiveImage, ProgressiveBackground, IconBase, IconLeft, IconRight, IconFullscreen },
   props: {
     images: [Array, Object],
     aspectRatio: Number
