@@ -6,6 +6,9 @@ import store from './store/'
 import VueMeta from 'vue-meta'
 import VueMq from 'vue-mq'
 
+import web_animations_js from 'web-animations-js'
+
+
 Vue.use(VueMeta)
 
 Vue.use(VueMq, {
