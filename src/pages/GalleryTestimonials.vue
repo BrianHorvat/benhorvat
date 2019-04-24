@@ -1,16 +1,22 @@
 <template>
-  <section class="testimonials right">
+  <section id="testimonials">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-half">
           <h1>Testimonials</h1>
           <div class="testimonials-content" v-html="testimonials.flavorText"></div>
           <div class="testimonials-list">
-            <div v-for="testimonial in testimonials.testimonials" :key="testimonial.name" class="testimonial">
-              <progressive-image :src="testimonial.picture" class="testimonial-picture"/>
+            <div
+              v-for="testimonial in testimonials.listings"
+              :key="testimonial.name"
+              class="testimonial"
+            >
+              <div class="testimonial-picture">
+                <progressive-background :src="testimonial.image.url"/>
+              </div>
               <div class="testimonial-description">
                 <h3>{{ testimonial.name }}</h3>
-                <h4>{{ testimonial.service }}</h4>
+                <h5>{{ testimonial.service }}</h5>
                 <div v-html="testimonial.quote" class="quote"></div>
               </div>
             </div>
@@ -22,22 +28,27 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import ProgressiveImage from '../components/ProgressiveImage.vue'
+import { mapState } from 'vuex'
+import ProgressiveBackground from '@/components/ProgressiveBackground'
 
-  export default {
-    name: 'gallery-testimonials',
-    resource: 'GalleryTestimonials',
-    components: {ProgressiveImage},
+export default {
+  name: 'gallery-testimonials',
+  resource: 'GalleryTestimonials',
+  components: { ProgressiveBackground },
 
-    computed: {
-      ...mapState(['testimonials'])
-    },
-    metaInfo: {
-      title: 'Testimonials'
-    },
-    beforeMount () {
-      this.$getResource('testimonials').then(testimonials => { this.$store.commit('testimonials', testimonials) })
-    }
-  }
+  computed: {
+    ...mapState({
+      testimonials: state => state.info.testimonials
+    })
+  },
+
+  created() {
+    this.$store.dispatch("info/getTestimonials")
+  },
+
+
+  metaInfo: {
+    title: 'Testimonials'
+  },
+}
 </script>

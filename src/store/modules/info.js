@@ -10,15 +10,18 @@ import {
 const state = {
   about: {
     content: '',
-    picture: ''
+    picture: '',
   },
   aboutLoaded: false,
 
-  testimonials: [],
+  testimonials: {
+    flavorText: '',
+    listings: [],
+  },
   testimonialsLoaded: false,
 
   process: {
-    content: ''
+    content: '',
   },
   processLoaded: false
 }
@@ -26,56 +29,85 @@ const state = {
 const getters = {}
 
 const actions = {
-  getAbout({
+  async getAbout({
     commit,
     state
   }) {
     if (state.aboutLoaded) return
 
     commit('setAboutLoaded', false)
-    return prismicAPI.fetch(
-        prismic.Predicates.at('document.type', 'about'))
-      .then(response => {
-        const data = response.results[0].data
-        commit('setAbout', {
-          content: prismicDOM.RichText.asHtml(data.content, linkResolver),
-          picture: data.profile_pic.url
-        })
-        commit('setAboutLoaded', true)
-      })
+
+    const response = await prismicAPI.fetch(prismic.Predicates.at('document.type', 'about'));
+    const data = response.results[0].data;
+
+    commit('setAbout', {
+      content: prismicDOM.RichText.asHtml(data.content, linkResolver),
+      picture: data.profile_pic.url
+    });
+    commit('setAboutLoaded', true);
   },
 
-  getProcess({
+  async getProcess({
     commit,
     state
   }) {
     if (state.processLoaded) return
 
     commit('setProcessLoaded', false)
-    return prismicAPI.fetch(
-        prismic.Predicates.at('document.type', 'the_process'))
-      .then(response => {
-        const data = response.results[0].data.body
-        commit('setProcess', data.map(section => {
-          if (section.slice_type == 'text') {
-            return section.items.map(item => {
-              return prismicDOM.RichText.asHtml(item.text, linkResolver)
-            })
-          } else if (section.slice_type == 'image___text') {
-            return {
-              text: prismicDOM.RichText.asHtml(section.primary.text, linkResolver),
-              images: section.items.map(item => {
-                return item.image
-              })
-            }
-          } else if (section.slice_type == 'images') {
-            return section.items.map(item => {
-              return item.image
-            })
-          }
-        }))
+
+    const response = await prismicAPI.fetch(prismic.Predicates.at('document.type', 'the_process'));
+    const data = response.results[0].data.body;
+
+    commit('setProcess', data.map(section => {
+      if (section.slice_type === 'text') {
+        return {
+          text: section.items.map(item => {
+            return prismicDOM.RichText.asHtml(item.text, linkResolver);
+          })
+        };
+      } else if (section.slice_type === 'image___text') {
+        return {
+          text: [prismicDOM.RichText.asHtml(section.primary.text, linkResolver)],
+          images: section.items.map(item => {
+            return item.image;
+          })
+        };
+      } else if (section.slice_type === 'images') {
+        return {
+          images: section.items.map(item => {
+            return item.image;
+          })
+        };
+      }
+    }));
+  },
+
+  async getTestimonials({
+    commit,
+    state
+  }) {
+    if (state.testimonialsLoaded) return
+
+    commit('setTestimonialsLoaded', false)
+
+    const response = await prismicAPI.fetch(prismic.Predicates.at('document.type', 'testimonials'));
+    const data = response.results[0].data;
+
+    console.dir(data)
+
+    commit('setTestimonials', {
+      flavorText: prismicDOM.RichText.asHtml(data.flavor_text, linkResolver),
+      listings: data.testimonials.map(testimonial => {
+        return {
+          name: testimonial.name,
+          image: testimonial.picture,
+          quote: prismicDOM.RichText.asHtml(testimonial.quote, linkResolver),
+          service: testimonial.service
+        }
       })
-  }
+    });
+    commit('setTestimonialsLoaded', true);
+  },
 }
 
 const mutations = {
