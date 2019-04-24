@@ -1,18 +1,27 @@
-.page.testimonials {
-    .testimonials-list {
-        .testimonial {
-            display: flex;
+.page#testimonials {
+  .testimonials-content {
+    margin-bottom: 1em;
+  }
 
-            .testimonial-picture {
-                width: 8em;
-                height: 8em;
-                object-fit: cover;
-            }
+  .testimonials-list {
+    .testimonial {
+      display: flex;
+      margin-bottom: 1em;
 
-            .testimonial-description {
-                display: flex;
-                flex-direction: column;
-            }
+      .testimonial-picture {
+        flex: 0 0 12em;
+        height: 12em;
+        margin-right: 1em;
+
+        .progressive-background {
+          padding-bottom: 100%;
         }
+      }
+
+      .testimonial-description {
+        display: flex;
+        flex-direction: column;
+      }
     }
+  }
 }
