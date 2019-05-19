@@ -25,25 +25,9 @@ $drop-shadow: drop-shadow(0px 0px 6px black);
     bottom: 0;
   }
 
-  .lightbox-controls,
-  .lightbox-backdrop {
-    opacity: 0;
-    transition: opacity 0.3s $transition, visibility 0.3s;
-  }
-
-  &.active {
-
-    .lightbox-controls,
-    .lightbox-backdrop {
-      opacity: 1;
-    }
-  }
-
   .lightbox {
     width: 100%;
     height: 100%;
-
-    will-change: opacity, transform;
 
     .light-images {
       position: absolute;
@@ -72,8 +56,6 @@ $drop-shadow: drop-shadow(0px 0px 6px black);
         justify-content: center;
         align-items: center;
 
-        transition: visibility 0.3s;
-
         position: absolute;
         top: 0;
         bottom: 0;
@@ -84,12 +66,14 @@ $drop-shadow: drop-shadow(0px 0px 6px black);
           opacity: 1;
         }
 
+        will-change: transform;
+
         img {
           max-height: 100%;
           max-width: 100%;
           height: auto;
           width: auto;
-          margin: auto;
+          // margin: auto;
           object-fit: contain;
 
 
@@ -167,15 +151,8 @@ $drop-shadow: drop-shadow(0px 0px 6px black);
     background-color: rgba(0, 0, 0, 1);
   }
 
-  // &.active {
-
-  //   .backdrop,
-  //   .lightbox,
-  //   #close,
-  //   #counter,
-  //   #left,
-  //   #right {
-  //     opacity: 1;
-  //   }
-  // }
+  .lightbox-controls,
+  .lightbox-backdrop {
+    will-change: opacity;
+  }
 }
