@@ -1,3 +1,6 @@
+$desktop-width: 12em;
+$mobile-width: 8em;
+
 .page#testimonials {
   .testimonials-content {
     margin-bottom: 1em;
@@ -9,12 +12,19 @@
       margin-bottom: 1em;
 
       .testimonial-picture {
-        flex: 0 0 12em;
-        height: 12em;
+        flex: 0 0 $desktop-width;
+        height: $desktop-width;
         margin-right: 1em;
 
         .progressive-background {
           padding-bottom: 100%;
+        }
+      }
+
+      @include mobile {
+        .testimonial-picture {
+          flex: 0 0 $mobile-width;
+          height: $mobile-width;
         }
       }
 
