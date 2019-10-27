@@ -3,9 +3,9 @@
     xmlns="http://www.w3.org/2000/svg"
     :width="width"
     :height="height"
-    viewBox="0 0 24 24"
     :aria-labelledby="iconName"
     role="presentation"
+    viewBox="0 0 24 24"
   >
     <title :id="iconName" lang="en">{{ iconName }}</title>
     <!-- <g :fill="iconColor"> -->
@@ -19,7 +19,7 @@ export default {
   props: {
     iconName: {
       type: String,
-      default: 'box'
+      default: "box"
     },
     width: {
       type: [Number, String],
@@ -31,8 +31,8 @@ export default {
     },
     iconColor: {
       type: String,
-      default: 'currentColor'
+      default: "currentColor"
     }
   }
-}
+};
 </script>
