@@ -6,15 +6,12 @@
 //   }, delay)
 // })
 
-export const kebabify = (words) =>
-  words
-    .toLowerCase()
-    .replace(' ', '-')
+export const kebabify = words => words.toLowerCase().replace(" ", "-");
 
-export const prettyDate = (date) =>
+export const prettyDate = date =>
   new Date(date)
     .toString()
-    .split(' ')
+    .split(" ")
     .slice(0, 4)
-    .join(' ')
-    .replace(/( \d+)$/, ',$1')
+    .join(" ")
+    .replace(/( \d+)$/, ",$1");

@@ -1,17 +1,36 @@
 .gallery {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 
-  .main {
-    position: relative;
-    flex: 1;
-    margin: 1em;
-  }
+  	section.main {
+		position: relative;
+		flex: 1;
+  	}
+
+  	section.page {
+		margin-top: calc(var(--header-height) + 1em);
+  	}
+}
+
+.is-one-half {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.is-two-thirds {
+	width: 66.666%;
+	margin: 0 auto;
+}
+
+@include touch {
+	.container {
+		margin: 0 1em;
+	}
 }
 
 @media screen and (min-width: 1408px) {
-  section .container.narrow {
-    max-width: 1152px !important;
-  }
+	section .container.narrow {
+		max-width: 1152px !important;
+	}
 }

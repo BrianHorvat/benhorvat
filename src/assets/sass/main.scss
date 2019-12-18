@@ -24,14 +24,17 @@ $font-light-grey: rgba(0, 0, 0, 0.7);
 $font-grey: rgba(0, 0, 0, 0.54);
 $font-disabled: rgba(0, 0, 0, 0.3);
 
+$font-light: rgba(255,255,255,0.87);
+
 $highlight-primary: rgb(0, 0, 0);
+$highlight-light: rgb(255,255,255);
 
 $link-color: hsla(207, 123%, 41%, 1);
 $link-hover: hsla(215, 100%, 45%, 1);
 
 $icon-color: $font-primary;
 
-$corner-radius: 0;
+$corner-radius: 3px;
 
 // Main bg Colors
 $bg-main: #fafafa;
@@ -42,6 +45,16 @@ $bg-card-light: rgba(0, 0, 0, 0.10);
 $hr-color: rgba(0, 0, 0, 0.12);
 
 $transition: cubic-bezier(0.4, 0.0, 0.6, 1);
+
+
+// HEADER
+$header-height: 8em;
+$header-height-mobile: 10em;
+
+
+// Shadows
+$card-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.05)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+$card-shadow-hover: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
 
 /***
  ***/
@@ -72,6 +85,12 @@ body {
   -o-font-feature-settings: "kern"1;
   font-feature-settings: "kern"1;
   font-kerning: normal;
+
+  --header-height: #{$header-height};
+
+  @include mobile {
+	  --header-height: #{$header-height-mobile}
+  }
 }
 
 a {
@@ -123,9 +142,9 @@ p {
   margin-bottom: 1em;
   line-height: $paragraph-line-height;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+  // &:last-child {
+  //   margin-bottom: 0;
+  // }
 }
 
 hr {
@@ -188,6 +207,11 @@ noscript+.spinner {
 "./layout/components/progressiveimg",
 "./layout/components/gallery",
 "./layout/components/lightbox",
+"./layout/components/feed",
 "./layout/transitions/feed",
 "./layout/transitions/pages",
-"./layout/pages/all.scss";
+"./layout/pages/front",
+"./layout/pages/post",
+"./layout/pages/contact",
+"./layout/pages/about",
+"./layout/pages/testimonials";

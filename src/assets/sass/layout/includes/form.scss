@@ -1,7 +1,17 @@
 .form {
     .field {
+        .field-label {
+            display: block;
+
+            &-optional-badge {
+                color: $font-grey;
+                font-size: 0.8em;
+            }
+        }
+
         .field-desc {
             color: $font-grey;
+            margin-bottom: 0.5em;
         }
 
         &.full-width {

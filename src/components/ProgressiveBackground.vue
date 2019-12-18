@@ -1,30 +1,30 @@
 <template>
-  <div class="progressive-background" :class="imageClass">
-    <transition name="progressive-image-fade">
-      <img v-show="loaded" :src="src" ref="main">
-    </transition>
-  </div>
+	<div class="progressive-background" :class="imageClass">
+		<transition name="progressive-image-fade">
+			<img v-show="loaded" ref="main" :src="src" />
+		</transition>
+	</div>
 </template>
 
 <script>
-import ProgressiveImageLoader from './mixins/ProgressiveImageLoader.js'
+import ProgressiveImageLoader from "./mixins/ProgressiveImageLoader.js";
 
 export default {
-  name: 'progressive-background',
+	name: "ProgressiveBackground",
 
-  mixins: [ProgressiveImageLoader],
+	mixins: [ProgressiveImageLoader],
 
-  computed: {
-    imageClass() {
-      return {
-        loading: !this.loaded
-      }
-    },
-    imageStyle() {
-      return {
-        backgroundImage: this.image ? 'url(' + this.image + ')' : ''
-      }
-    }
-  },
-}
+	computed: {
+		imageClass() {
+			return {
+				loading: !this.loaded
+			};
+		},
+		imageStyle() {
+			return {
+				backgroundImage: this.image ? "url(" + this.image + ")" : ""
+			};
+		}
+	}
+};
 </script>

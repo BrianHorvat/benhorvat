@@ -1,14 +1,18 @@
 .page#about {
+	.about-grid {
+		display: grid;
+		grid-template-columns: 3fr 1fr;
+		gap: 0 2em;
+	}
 
-  .profile-picture {
-    padding-bottom: 100%;
+	.profile-picture {
+		padding-bottom: 120%;
+		margin-bottom: 1em;
+		border-radius: $corner-radius;
+		filter: $feed-card-shadow;
+	}
 
-    img {
-      filter: drop-shadow(1px 2px 6px rgba(0, 0, 0, 0.1));
-    }
-  }
-
-  h4.profile-name {
-    text-align: center;
-  }
+	h4.profile-name {
+		text-align: center;
+	}
 }
