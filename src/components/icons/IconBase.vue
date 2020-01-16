@@ -1,4 +1,4 @@
-<template functional>
+<template>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		:width="width"
@@ -9,9 +9,7 @@
 		viewBox="0 0 24 24"
 	>
 		<title :id="iconName" lang="en">{{ iconName }}</title>
-		<!-- <g :fill="iconColor"> -->
-		<slot></slot>
-		<!-- </g> -->
+		<slot />
 	</svg>
 </template>
 
