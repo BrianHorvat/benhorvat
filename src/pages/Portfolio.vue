@@ -1,5 +1,5 @@
 <template>
-	<section class="portfolio">
+	<section id="portfolio" class="page">
 		<Feed />
 	</section>
 </template>

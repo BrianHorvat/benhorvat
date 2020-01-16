@@ -1,5 +1,5 @@
 <template>
-	<section id="process">
+	<section id="process" class="page">
 		<div class="container">
 			<div class="is-two-thirds">
 				<h1>The Process</h1>

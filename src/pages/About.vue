@@ -1,5 +1,5 @@
 <template>
-	<section id="about">
+	<section id="about" class="page">
 		<div class="container">
 			<div class="about-grid is-two-thirds">
 				<div>

@@ -1,5 +1,5 @@
 <template>
-	<section id="contact">
+	<section id="contact" class="page">
 		<div class="container">
 			<div class="contact-grid is-two-thirds">
 				<div>

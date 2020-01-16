@@ -1,16 +1,12 @@
-.gallery {
+#app {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+}
 
-  	section.main {
-		position: relative;
-		flex: 1;
-  	}
-
-  	section.page {
-		margin-top: calc(var(--header-height) + 1em);
-  	}
+section.page {
+	margin-top: calc(var(--header-height) + 1em);
+	flex-grow: 1;
 }
 
 .is-one-half {
