@@ -25,23 +25,17 @@
 					</router-link>
 				</div>
 				<div class="nav-menu right">
-					<div class="nav-item has-dropdown">
-						<span
-							>Information<IconBase class="light"
-								><IconDropdown /></IconBase
-						></span>
-						<div class="nav-dropdown">
-							<router-link :to="{ name: 'about' }"
-								>About Me</router-link
-							>
-							<router-link :to="{ name: 'process' }"
-								>The Process</router-link
-							>
-							<router-link :to="{ name: 'testimonials' }"
-								>Testimonials</router-link
-							>
-						</div>
-					</div>
+					<HeaderDropdown label="Information">
+						<router-link :to="{ name: 'about' }"
+							>About Me</router-link
+						>
+						<router-link :to="{ name: 'process' }"
+							>The Process</router-link
+						>
+						<router-link :to="{ name: 'testimonials' }"
+							>Testimonials</router-link
+						>
+					</HeaderDropdown>
 					<div class="nav-item">
 						<router-link :to="{ name: 'contact' }"
 							>Contact</router-link
@@ -97,13 +91,12 @@
 
 <script>
 import { mapState } from "vuex";
-import IconBase from "../components/icons/IconBase";
-import IconDropdown from "../components/icons/IconDropdown";
+import HeaderDropdown from "./HeaderDropdown";
 
 export default {
 	name: "GalleryHeader",
 
-	components: { IconBase, IconDropdown },
+	components: { HeaderDropdown },
 
 	computed: {
 		...mapState({
