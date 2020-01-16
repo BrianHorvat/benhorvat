@@ -6,12 +6,7 @@ import store from "./store/";
 import VueMeta from "vue-meta";
 import VueMq from "vue-mq";
 
-import layouts from "./layouts/";
-
 import web_animations_js from "web-animations-js";
-
-// Register layout components
-Object.entries(layouts).forEach(([key, value]) => Vue.component(key, value));
 
 Vue.use(VueMeta);
 

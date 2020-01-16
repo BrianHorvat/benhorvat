@@ -1,16 +1,16 @@
 <template>
 	<div id="app" class="gallery">
+		<GalleryHeader />
 		<transition :name="pageTransition">
-			<component :is="currentLayout">
-				<router-view />
-			</component>
+			<router-view />
 		</transition>
+		<GalleryFooter />
 	</div>
 </template>
 
 <script>
-import GalleryHeader from "./components/GalleryHeader";
-import GalleryFooter from "./components/GalleryFooter";
+import GalleryHeader from "@/components/header/GalleryHeader";
+import GalleryFooter from "@/components/GalleryFooter";
 
 export default {
 	name: "App",
