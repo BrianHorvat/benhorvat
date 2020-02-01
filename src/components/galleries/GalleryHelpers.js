@@ -21,15 +21,14 @@ const durations = Object.freeze({
 
 const easingPoints = [0.4, 0.0, 0.2, 1];
 
-const easing = `cubic-bezier(${easingPoints[0]}, ${easingPoints[1]}, ${
-	easingPoints[2]
-}, ${easingPoints[3]})`;
+const easing = `cubic-bezier(${easingPoints[0]}, ${easingPoints[1]}, ${easingPoints[2]}, ${easingPoints[3]})`;
 
 const animatePromise = (element, ...animParams) => {
 	let animation;
-	const promise = new Promise(resolve => {
+	const promise = new Promise((resolve, reject) => {
 		animation = element.animate.apply(element, animParams);
-		animation.onfinish = resolve;
+		animation.onfinish = () => resolve(animation);
+		animation.oncancel = () => reject(animation);
 	});
 
 	return {

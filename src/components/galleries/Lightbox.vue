@@ -1,6 +1,6 @@
 <template>
 	<div
-		v-show="show"
+		v-show="open"
 		ref="container"
 		class="lightbox-container"
 		tabindex="0"
@@ -88,27 +88,17 @@ const curve = BezierEasing(
 	easingPoints[3]
 );
 
-function destinationRectTransform(dest, origin) {
-	if (origin) {
-		const originRect = origin.getBoundingClientRect();
-		const destRect = dest.getBoundingClientRect();
-
-		const widthInScale = originRect.width / destRect.width;
-		const heightInScale = originRect.height / destRect.height;
-
-		const distanceTop =
+function transformDistances(destRect, originRect) {
+	return {
+		top:
 			originRect.top +
 			originRect.height / 2 -
-			(destRect.top + destRect.height / 2);
-		const distanceLeft =
+			(destRect.top + destRect.height / 2),
+		left:
 			originRect.left +
 			originRect.width / 2 -
-			(destRect.left + destRect.width / 2);
-
-		return `translate(${distanceLeft}px, ${distanceTop}px) scale(${widthInScale}, ${heightInScale})`;
-	} else {
-		return "none";
-	}
+			(destRect.left + destRect.width / 2)
+	};
 }
 
 export default {
@@ -130,6 +120,10 @@ export default {
 		},
 		activeImage: {
 			type: Number,
+			required: true
+		},
+		open: {
+			type: Boolean,
 			required: true
 		}
 	},
@@ -157,9 +151,7 @@ export default {
 		},
 		sliderStyle() {
 			return {
-				transform: `translateX(${this.offset.x}px) translateY(${
-					this.offset.y
-				}px)`
+				transform: `translateX(${this.offset.x}px) translateY(${this.offset.y}px)`
 			};
 		},
 		sliderClass() {
@@ -188,6 +180,29 @@ export default {
 			return { opacity };
 		}
 	},
+
+	watch: {
+		open(val) {
+			if (val) {
+				this.openLightbox();
+			} else {
+				this.closeLightbox();
+			}
+		},
+		state(val) {
+			// Update draggable based on current state
+			switch (val) {
+				case states.ENTER:
+				case states.LEAVE:
+					this.$data.$_swipable_data.draggable = false;
+					break;
+				default:
+					this.$data.$_swipable_data.draggable = true;
+					break;
+			}
+		}
+	},
+
 	mounted() {
 		this.updateDims();
 
@@ -207,51 +222,54 @@ export default {
 			this.$emit("lightbox-page-right");
 		},
 		swipeTapHandler() {
-			this.close();
+			this.closeLightbox();
 		},
 		swipeUp() {
-			this.close();
+			this.closeLightbox();
 		},
 		swipeDown() {
-			this.close();
+			this.closeLightbox();
 		},
 
 		async enter() {
 			this.updateDims();
 
-			this.$data.$_swipable_data.draggable = false;
 			this.state = states.ENTER;
 
-			const imageAnim = animatePromise(
+			this.$refs.container.classList.add("active");
+			this.$refs.container.focus();
+
+			const destRect = this.$refs.image[1].$refs.main.getBoundingClientRect();
+			const originRect = this.refElem.getBoundingClientRect();
+			const transformDist = transformDistances(destRect, originRect);
+
+			animatePromise(
 				this.$refs.image[1].$refs.main,
 				[
 					{
 						// From
-						transform: destinationRectTransform(
-							this.$refs.image[1].$refs.main,
-							this.refElem
-						)
+						width: `${originRect.width}px`,
+						height: `${originRect.height}px`,
+						transform: `translate(${transformDist.left}px, ${transformDist.top}px)`
 					},
 					{
 						// To
+						width: `${destRect.width}px`,
+						height: `${destRect.height}px`,
 						transform: "none"
 					}
 				],
 				{
 					duration: durations.enter,
-					fill: "both",
+					fill: "forwards",
 					easing
 				}
-			);
-
-			imageAnim.promise.then(() => {
-				imageAnim.animation.cancel();
+			).promise.then(anim => {
+				anim.cancel();
 				this.state = states.IDLE;
-
-				this.$data.$_swipable_data.draggable = true;
 			});
 
-			const backdropKeyframes = [
+			const opacityKeyframes = [
 				[{ opacity: 0 }, { opacity: 1 }],
 				{
 					duration: durations.enter,
@@ -260,34 +278,30 @@ export default {
 				}
 			];
 
-			const backdropAnim = animatePromise(
+			animatePromise(
 				this.$refs.backdrop,
-				...backdropKeyframes
-			);
-			backdropAnim.promise.then(() => backdropAnim.animation.cancel());
+				...opacityKeyframes
+			).promise.then(anim => anim.cancel());
 
-			const controlsAnim = animatePromise(
+			animatePromise(
 				this.$refs.controls,
-				...backdropKeyframes
-			);
-			controlsAnim.promise.then(() => controlsAnim.animation.cancel());
-
-			this.$refs.container.classList.add("active");
-			this.$refs.container.focus();
+				...opacityKeyframes
+			).promise.then(anim => anim.cancel());
 		},
 		async leave() {
-			const from = this.sliderStyle.transform;
-
+			// Clear any page transition if applicable
 			if (this.animationType !== null) {
 				this.resetPageTransition();
 			}
 
-			this.$refs.imagebox.style.transform = "none"; // Manually clear transform property so
+			// Manually clear transform property so it isn't applied twice
+			this.$refs.imagebox.style.transform = "none";
 
-			this.$data.$_swipable_data.draggable = false;
+			// Update state
 			this.state = states.LEAVE;
 
-			const backdropKeyframes = [
+			// Animation properties for fading out background and controls
+			const opacityKeyframes = [
 				[{ opacity: this.backdropStyle.opacity }, { opacity: 0 }],
 				{
 					duration: durations.exit,
@@ -296,48 +310,49 @@ export default {
 				}
 			];
 
-			const backdropAnim = animatePromise(
-				this.$refs.backdrop,
-				...backdropKeyframes
-			);
-			const controlsAnim = animatePromise(
-				this.$refs.controls,
-				...backdropKeyframes
-			);
+			// Get bounding rectangles for origin and destination
+			const originRect = this.$refs.image[1].$refs.main.getBoundingClientRect();
+			const destRect = this.refElem.getBoundingClientRect();
+			const transformDist = transformDistances(destRect, originRect);
 
-			const imageAnim = animatePromise(
-				this.$refs.image[1].$refs.main,
-				[
+			await Promise.all([
+				animatePromise(
+					this.$refs.backdrop,
+					...opacityKeyframes
+				).promise.then(anim => anim.cancel()),
+				animatePromise(
+					this.$refs.controls,
+					...opacityKeyframes
+				).promise.then(anim => anim.cancel()),
+				animatePromise(
+					this.$refs.image[1].$refs.main,
+					[
+						{
+							// From
+							width: `${originRect.width}px`,
+							height: `${originRect.height}px`,
+							transform: this.sliderStyle.transform
+						},
+						{
+							// To
+							width: `${destRect.width}px`,
+							height: `${destRect.height}px`,
+							transform: `translate(${-transformDist.left}px, ${-transformDist.top}px)`
+						}
+					],
 					{
-						// From
-						transform: from
-					},
-					{
-						// To
-						transform: destinationRectTransform(
-							this.$refs.image[1].$refs.main,
-							this.refElem
-						)
+						duration: durations.exit,
+						fill: "forwards",
+						easing
 					}
-				],
-				{
-					duration: durations.exit,
-					easing,
-					fill: "forwards"
-				}
-			);
-
-			await imageAnim.promise.then(() => {
-				this.state = states.IDLE;
-				this.$data.$_swipable_data.draggable = true;
-			});
-
-			return [backdropAnim, controlsAnim, imageAnim];
+				).promise.then(anim => {
+					this.state = states.IDLE;
+					anim.cancel();
+				})
+			]);
 		},
 
-		async open() {
-			this.show = true;
-
+		async openLightbox() {
 			this.$emit("lightbox-open");
 			this.$emit("lightbox-toggle");
 
@@ -345,24 +360,22 @@ export default {
 
 			this.enter();
 		},
-		async close() {
+		async closeLightbox() {
 			if (this.state !== states.DRAGGING && this.state !== states.IDLE)
 				return;
 
-			const anims = await this.leave();
+			await this.leave();
 
 			this.$emit("lightbox-close");
 			this.$emit("lightbox-toggle");
 
-			this.show = false;
-
 			await this.$nextTick;
 
-			anims.forEach(anim => anim.animation.cancel());
+			// anims.forEach(anim => anim.animation.cancel());
 		},
 		closeOnEsc: function() {
 			if (this.escToClose) {
-				this.close();
+				this.closeLightbox();
 			}
 		},
 
@@ -379,3 +392,160 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+$drop-shadow: drop-shadow(0px 0px 6px black);
+
+.lightbox-container {
+	$c: &;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9999;
+
+	outline: none;
+
+	user-select: none;
+
+	.lightbox,
+	.lightbox-backdrop {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	.lightbox {
+		width: 100%;
+		height: 100%;
+
+		.light-images {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+
+			display: flex;
+
+			will-change: transform;
+
+			&.draggable {
+				cursor: grab;
+			}
+
+			&.dragging {
+				cursor: grabbing;
+			}
+
+			.light-image {
+				display: flex;
+				flex: 0 0 100%;
+				height: 100%;
+				justify-content: center;
+				align-items: center;
+
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+
+				&.active {
+					opacity: 1;
+				}
+
+				will-change: transform;
+
+				&::v-deep img {
+					max-height: 100%;
+					max-width: 100%;
+					height: auto;
+					width: auto;
+					// margin: auto;
+					// object-fit: contain;
+					object-fit: cover;
+
+					// disable right click on image
+					pointer-events: none;
+				}
+			}
+		}
+	}
+
+	.lightbox-controls {
+		#counter {
+			position: absolute;
+			top: 0;
+			right: 0;
+
+			z-index: 3;
+
+			color: white;
+			filter: $drop-shadow;
+			line-height: 3.25em;
+			padding: 0 0.8125rem;
+		}
+
+		.action-button {
+			position: absolute;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 3;
+			position: absolute;
+
+			padding: 1em;
+
+			cursor: pointer;
+
+			svg {
+				width: 1.25em;
+				height: 1.25em;
+				fill: white;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.12);
+			}
+
+			&#close {
+				top: 0;
+				left: 0;
+				z-index: 4;
+			}
+
+			&#left,
+			&#right {
+				top: 10%;
+				bottom: 10%;
+			}
+
+			&#left {
+				left: 0;
+			}
+
+			&#right {
+				right: 0;
+			}
+		}
+	}
+
+	.lightbox-backdrop {
+		background-color: rgba(0, 0, 0, 1);
+	}
+
+	.lightbox-controls,
+	.lightbox-backdrop {
+		will-change: opacity;
+	}
+}
+</style>
