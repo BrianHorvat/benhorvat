@@ -1,6 +1,6 @@
 <template>
 	<div
-		v-show="open"
+		v-show="show"
 		ref="container"
 		class="lightbox-container"
 		tabindex="0"
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div ref="controls" class="lightbox-controls" :style="backdropStyle">
-			<div id="close" class="action-button" @click.stop="close">
+			<div id="close" class="action-button" @click.stop="closeLightbox">
 				<icon-base icon-name="Close">
 					<icon-back />
 				</icon-base>
@@ -121,10 +121,6 @@ export default {
 		activeImage: {
 			type: Number,
 			required: true
-		},
-		open: {
-			type: Boolean,
-			required: true
 		}
 	},
 	data() {
@@ -182,13 +178,6 @@ export default {
 	},
 
 	watch: {
-		open(val) {
-			if (val) {
-				this.openLightbox();
-			} else {
-				this.closeLightbox();
-			}
-		},
 		state(val) {
 			// Update draggable based on current state
 			switch (val) {
@@ -235,9 +224,6 @@ export default {
 			this.updateDims();
 
 			this.state = states.ENTER;
-
-			this.$refs.container.classList.add("active");
-			this.$refs.container.focus();
 
 			const destRect = this.$refs.image[1].$refs.main.getBoundingClientRect();
 			const originRect = this.refElem.getBoundingClientRect();
@@ -287,6 +273,9 @@ export default {
 				this.$refs.controls,
 				...opacityKeyframes
 			).promise.then(anim => anim.cancel());
+
+			this.$refs.container.classList.add("active");
+			this.$refs.container.focus();
 		},
 		async leave() {
 			// Clear any page transition if applicable
@@ -353,6 +342,8 @@ export default {
 		},
 
 		async openLightbox() {
+			this.show = true;
+
 			this.$emit("lightbox-open");
 			this.$emit("lightbox-toggle");
 
@@ -369,9 +360,7 @@ export default {
 			this.$emit("lightbox-close");
 			this.$emit("lightbox-toggle");
 
-			await this.$nextTick;
-
-			// anims.forEach(anim => anim.animation.cancel());
+			this.show = false;
 		},
 		closeOnEsc: function() {
 			if (this.escToClose) {
