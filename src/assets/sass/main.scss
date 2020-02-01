@@ -34,7 +34,8 @@ $link-hover: hsla(215, 100%, 45%, 1);
 
 $icon-color: $font-primary;
 
-$corner-radius: 3px;
+// $corner-radius: 3px;
+$corner-radius: 0;
 
 // Main bg Colors
 $bg-main: #fafafa;
@@ -53,8 +54,11 @@ $header-height-mobile: 10em;
 
 
 // Shadows
-$card-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.05)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
-$card-shadow-hover: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+// $card-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.05)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+// $card-shadow-hover: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+$card-shadow: none;
+$card-shadow-hover: none;
+
 
 /***
  ***/
@@ -89,7 +93,7 @@ body {
   --header-height: #{$header-height};
 
   @include mobile {
-	  --header-height: #{$header-height-mobile}
+	  --header-height: #{$header-height-mobile};
   }
 }
 
