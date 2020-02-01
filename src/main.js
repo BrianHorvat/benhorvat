@@ -6,6 +6,7 @@ import store from "./store/";
 import VueMeta from "vue-meta";
 import VueMq from "vue-mq";
 
+// eslint-disable-next-line no-unused-vars
 import web_animations_js from "web-animations-js";
 
 Vue.use(VueMeta);
