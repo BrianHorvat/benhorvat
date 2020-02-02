@@ -51,7 +51,7 @@ export default {
 	data() {
 		return {
 			activeImage: 0,
-			showLightbox: false,
+			lightboxShowing: false,
 			activeElem: null
 		};
 	},
@@ -62,6 +62,16 @@ export default {
 				"padding-top": Math.floor(this.aspectRatio * 100) + "%"
 			};
 		}
+	},
+
+	watch: {
+		activeImage() {
+			this.updateActiveElem();
+		}
+	},
+
+	mounted() {
+		this.updateActiveElem();
 	},
 
 	methods: {
@@ -87,7 +97,7 @@ export default {
 		},
 		cardVisible(index) {
 			return {
-				hidden: this.showLightbox && index === this.activeImage
+				hidden: this.lightboxShowing && index === this.activeImage
 			};
 		},
 		updateActiveElem() {

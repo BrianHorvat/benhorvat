@@ -204,7 +204,7 @@ export default {
 			}
 		},
 		swipeTapHandler() {
-			this.$refs.lightbox.open();
+			this.$refs.lightbox.openLightbox();
 		},
 
 		updateDims() {
@@ -264,7 +264,7 @@ export default {
 
 			will-change: transform;
 
-			.big-image {
+			.big-image::v-deep {
 				display: flex;
 
 				position: absolute;
