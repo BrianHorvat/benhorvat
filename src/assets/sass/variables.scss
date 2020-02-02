@@ -1,0 +1,93 @@
+
+// @import "../../../node_modules/@bulma/sass/utilities/_all.sass";
+// @import "../../../node_modules/@bulma/sass/base/_all.sass";
+// @import "../../../node_modules/@bulma/sass/elements/container.sass";
+
+// @import "bulma/sass/utilities/mixins.sass";
+
+// Fonts
+$base-font-family: "Lato", sans-serif;
+$base-font-size: 16px;
+$base-font-weight: 400;
+$base-line-height: 1.4;
+$paragraph-line-height: 1.6;
+
+$bold-font-weight: normal;
+
+$accent-font-family: "Julius Sans One", sans-serif;
+
+$font-primary: rgba(0, 0, 0, 0.87);
+$font-light-grey: rgba(0, 0, 0, 0.7);
+$font-grey: rgba(0, 0, 0, 0.54);
+$font-disabled: rgba(0, 0, 0, 0.3);
+
+$font-light: rgba(255,255,255,0.87);
+
+$highlight-primary: rgb(0, 0, 0);
+$highlight-light: rgb(255,255,255);
+
+$link-color: hsla(207, 123%, 41%, 1);
+$link-hover: hsla(215, 100%, 45%, 1);
+
+$icon-color: $font-primary;
+
+// $corner-radius: 3px;
+$corner-radius: 0;
+
+// Main bg Colors
+$bg-main: #fafafa;
+$bg-card: rgba(0, 0, 0, 0.05);
+$bg-card-light: rgba(0, 0, 0, 0.10);
+
+// Misc Colors
+$hr-color: rgba(0, 0, 0, 0.12);
+
+$transition: cubic-bezier(0.4, 0.0, 0.6, 1);
+
+
+// HEADER
+$header-height: 8em;
+$header-height-mobile: 10em;
+
+
+// Shadows
+// $card-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.05)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+// $card-shadow-hover: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+$card-shadow: none;
+$card-shadow-hover: none;
+
+
+// Header Colors
+$header-bg: grey;
+
+$header-font-color: rgba(255, 255, 255, 0.87);
+$header-font-hover: $highlight-primary;
+
+$header-title-font-color: rgba(0, 0, 0, 0.7);
+$header-title-font-hover: $highlight-primary;
+
+$header-title-bg-hover: rgba(0, 0, 0, 0.06);
+$header-title-bg-focus: rgba(0, 0, 0, 0.12);
+$header-title-bg-hover-transparent: rgba(255, 255, 255, 0.12);
+$header-title-bg-focus-transparent: rgba(255, 255, 255, 0.24);
+
+$header-border-width: 0.125rem;
+$header-border-color: rgba(255, 255, 255, 0.3);
+
+$header-dropdown-bg: hsl(26, 3%, 50%);
+$header-dropdown-shadow: 0 5px 10px rgba(0, 0, 0, 0.05), 0 15px 40px rgba(0, 0, 0, 0.2);
+
+// Footer colors
+$footer-bg: #f5f5f5;
+$footer-border: 1px solid $hr-color;
+$footer-copy-color: $font-grey;
+
+$footer-inset: 2em;
+$footer-inset-mobile: 1em;
+
+// Feed
+$feed-card-shadow: $card-shadow;
+$feed-card-shadow-hover: $card-shadow-hover;
+
+$feed-grid-width-desktop: 3;
+$feed-grid-width-mobile: 2;

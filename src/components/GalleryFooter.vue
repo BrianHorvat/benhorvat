@@ -1,47 +1,6 @@
 <template>
 	<footer class="footer">
-		<ul class="social-media">
-			<li class="social-icon">
-				<a :href="this.$store.getters['gallery/instagramLink']">
-					<icon-base icon-name="Instagram">
-						<icon-instagram />
-					</icon-base>
-					<span class="is-hidden-mobile">{{
-						meta.social.instagram
-					}}</span>
-				</a>
-			</li>
-			<li class="social-icon">
-				<a :href="this.$store.getters['gallery/facebookLink']">
-					<icon-base icon-name="Facebook">
-						<icon-facebook />
-					</icon-base>
-					<span class="is-hidden-mobile">{{
-						meta.social.facebook
-					}}</span>
-				</a>
-			</li>
-			<li class="social-icon">
-				<a :href="this.$store.getters['gallery/emailLink']">
-					<icon-base icon-name="Email">
-						<icon-email />
-					</icon-base>
-					<span class="is-hidden-mobile">{{
-						meta.social.email
-					}}</span>
-				</a>
-			</li>
-			<li class="social-icon">
-				<a :href="this.$store.getters['gallery/phoneLink']">
-					<icon-base icon-name="Phone">
-						<icon-phone />
-					</icon-base>
-					<span class="is-hidden-mobile">{{
-						this.$store.getters["gallery/prettyPhone"]
-					}}</span>
-				</a>
-			</li>
-		</ul>
+		<SocialIcons />
 		<span class="copyright"
 			>&copy; 2017-{{ currentYear }}, {{ meta.title }}</span
 		>
@@ -50,20 +9,12 @@
 
 <script>
 import { mapState } from "vuex";
-import IconBase from "./icons/IconBase";
-import IconFacebook from "./icons/IconFacebook";
-import IconEmail from "./icons/IconEmail";
-import IconInstagram from "./icons/IconInstagram";
-import IconPhone from "./icons/IconPhone";
+import SocialIcons from "@/components/SocialIcons";
 
 export default {
 	name: "GalleryFooter",
 	components: {
-		IconBase,
-		IconFacebook,
-		IconEmail,
-		IconInstagram,
-		IconPhone
+		SocialIcons
 	},
 
 	computed: {
@@ -76,3 +27,36 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+footer.footer {
+	display: flex;
+	flex-direction: column;
+
+	background: $footer-bg;
+	padding: 1em 0;
+	margin-top: 1em;
+
+	position: relative;
+	align-items: center;
+	justify-content: center;
+
+	ul.social-media {
+		display: flex;
+		justify-content: center;
+		margin: 1em 0;
+
+		li.social-icon {
+			margin: 0 0.5em;
+		}
+	}
+
+	span.copyright {
+		color: $footer-copy-color;
+		text-align: center;
+
+		display: block;
+		margin: 1em 0;
+	}
+}
+</style>

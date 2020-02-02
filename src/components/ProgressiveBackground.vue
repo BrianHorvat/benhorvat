@@ -28,3 +28,54 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+.progressive-background {
+	position: relative;
+	overflow: hidden;
+
+	&.loading {
+		animation: pulse 2s infinite $transition;
+	}
+
+	img {
+		object-fit: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+@keyframes pulse {
+	0% {
+		background-color: #888;
+	}
+	50% {
+		background-color: #555;
+	}
+	100% {
+		background-color: #888;
+	}
+}
+
+.progressive-image-fade {
+	&-enter-active,
+	&-leave-active {
+		transition: all 200ms $transition;
+	}
+
+	&-enter,
+	&-leave-to {
+		opacity: 0;
+	}
+
+	&-leave,
+	&-enter-to {
+		opacity: 1;
+	}
+}
+</style>

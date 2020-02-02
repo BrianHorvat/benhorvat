@@ -15,50 +15,7 @@
 			</video>
 			<div class="front-video__overlay top"></div>
 			<div class="front-video__overlay bottom"></div>
-			<ul class="front-video__social social-media light">
-				<li class="social-icon">
-					<a :href="this.$store.getters['gallery/instagramLink']">
-						<icon-base class="light" icon-name="Instagram">
-							<icon-instagram />
-						</icon-base>
-						<span class="is-hidden-mobile">{{
-							meta.social.instagram
-						}}</span>
-					</a>
-				</li>
-				<li class="social-icon">
-					<a :href="this.$store.getters['gallery/facebookLink']">
-						<icon-base class="light" icon-name="Facebook">
-							<icon-facebook />
-						</icon-base>
-						<span class="is-hidden-mobile">{{
-							meta.social.facebook
-						}}</span>
-					</a>
-				</li>
-
-				<li class="social-icon">
-					<a :href="this.$store.getters['gallery/emailLink']">
-						<icon-base class="light" icon-name="Email">
-							<icon-email />
-						</icon-base>
-						<span class="is-hidden-mobile">{{
-							meta.social.email
-						}}</span>
-					</a>
-				</li>
-
-				<li class="social-icon">
-					<a :href="this.$store.getters['gallery/phoneLink']">
-						<icon-base class="light" icon-name="Phone">
-							<icon-phone />
-						</icon-base>
-						<span class="is-hidden-mobile">{{
-							this.$store.getters["gallery/prettyPhone"]
-						}}</span>
-					</a>
-				</li>
-			</ul>
+			<SocialIcons class="front-video__social" :light="true" />
 		</div>
 		<Feed class="container" />
 	</section>
@@ -66,22 +23,14 @@
 
 <script>
 import { mapState } from "vuex";
-import IconBase from "@/components/icons/IconBase";
-import IconFacebook from "@/components/icons/IconFacebook";
-import IconEmail from "@/components/icons/IconEmail";
-import IconInstagram from "@/components/icons/IconInstagram";
-import IconPhone from "@/components/icons/IconPhone";
 import Feed from "@/components/Feed.vue";
+import SocialIcons from "@/components/SocialIcons.vue";
 
 export default {
 	name: "Home",
 	components: {
-		IconBase,
-		IconFacebook,
-		IconEmail,
-		IconInstagram,
-		IconPhone,
-		Feed
+		Feed,
+		SocialIcons
 	},
 
 	computed: {
@@ -98,3 +47,108 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+$front-video-shadow: 0 5px 10px rgba(0, 0, 0, 0.05),
+	0 15px 40px rgba(0, 0, 0, 0.2);
+
+.front-video {
+	width: 100%;
+	height: 70vh;
+	margin-bottom: 4em;
+
+	overflow: hidden;
+	position: relative;
+
+	box-shadow: $front-video-shadow;
+
+	video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__overlay {
+		height: $header-height * 4;
+		width: 100%;
+		position: absolute;
+
+		&.top {
+			top: 0;
+
+			&:before,
+			&:after {
+				display: block;
+				content: "";
+				position: absolute;
+				width: 100%;
+				top: 0;
+			}
+
+			&:before {
+				height: $header-height * 3;
+				background: linear-gradient(
+					180deg,
+					rgba(0, 0, 0, 0.5) 0%,
+					rgba(255, 255, 255, 0) 100%
+				);
+			}
+
+			&:after {
+				height: $header-height * 4;
+				background: linear-gradient(
+					180deg,
+					rgba(0, 0, 0, 0.1) 0%,
+					rgba(255, 255, 255, 0) 100%
+				);
+			}
+		}
+
+		&.bottom {
+			bottom: 0;
+
+			&:before,
+			&:after {
+				display: block;
+				content: "";
+				position: absolute;
+				width: 100%;
+				bottom: 0;
+			}
+
+			&:before {
+				height: $header-height * 3;
+				background: linear-gradient(
+					180deg,
+					rgba(255, 255, 255, 0) 0%,
+					rgba(0, 0, 0, 0.5) 100%
+				);
+			}
+
+			&:after {
+				height: $header-height * 4;
+				background: linear-gradient(
+					180deg,
+					rgba(255, 255, 255, 0) 0%,
+					rgba(0, 0, 0, 0.1) 100%
+				);
+			}
+		}
+	}
+
+	&__social {
+		position: absolute;
+		bottom: 0;
+		margin: 2em 0;
+		width: 100%;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		li.social-icon {
+			margin: 0 0.5em;
+		}
+	}
+}
+</style>

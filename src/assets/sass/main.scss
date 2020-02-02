@@ -1,64 +1,10 @@
 @charset "utf-8";
 
-@import "normalize";
+// @import "normalize";
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/base/_all.sass";
 @import "bulma/sass/elements/container.sass";
-@import "bulma/sass/grid/columns.sass";
-
-// Fonts
-$base-font-family: "Lato",
-sans-serif;
-$base-font-size: 16px;
-$base-font-weight: 400;
-$base-line-height: 1.4;
-$paragraph-line-height: 1.6;
-
-$bold-font-weight: normal;
-
-$accent-font-family: "Julius Sans One",
-sans-serif;
-
-$font-primary: rgba(0, 0, 0, 0.87);
-$font-light-grey: rgba(0, 0, 0, 0.7);
-$font-grey: rgba(0, 0, 0, 0.54);
-$font-disabled: rgba(0, 0, 0, 0.3);
-
-$font-light: rgba(255,255,255,0.87);
-
-$highlight-primary: rgb(0, 0, 0);
-$highlight-light: rgb(255,255,255);
-
-$link-color: hsla(207, 123%, 41%, 1);
-$link-hover: hsla(215, 100%, 45%, 1);
-
-$icon-color: $font-primary;
-
-// $corner-radius: 3px;
-$corner-radius: 0;
-
-// Main bg Colors
-$bg-main: #fafafa;
-$bg-card: rgba(0, 0, 0, 0.05);
-$bg-card-light: rgba(0, 0, 0, 0.10);
-
-// Misc Colors
-$hr-color: rgba(0, 0, 0, 0.12);
-
-$transition: cubic-bezier(0.4, 0.0, 0.6, 1);
-
-
-// HEADER
-$header-height: 8em;
-$header-height-mobile: 10em;
-
-
-// Shadows
-// $card-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.05)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
-// $card-shadow-hover: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
-$card-shadow: none;
-$card-shadow-hover: none;
-
+@import "variables";
 
 /***
  ***/
@@ -66,46 +12,46 @@ $card-shadow-hover: none;
 /*
  * Default element restyles
  */
-
-html {
-  box-sizing: border-box;
+ html {
+	box-sizing: border-box;
 }
 
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
-  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
-  color: $font-primary;
+	font: $base-font-weight #{$base-font-size}/#{$base-line-height}
+		$base-font-family;
+	color: $font-primary;
 
-  background: $bg-main;
+	background: $bg-main;
 
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern"1;
-  -moz-font-feature-settings: "kern"1;
-  -o-font-feature-settings: "kern"1;
-  font-feature-settings: "kern"1;
-  font-kerning: normal;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-feature-settings: "kern" 1;
+	-moz-font-feature-settings: "kern" 1;
+	-o-font-feature-settings: "kern" 1;
+	font-feature-settings: "kern" 1;
+	font-kerning: normal;
 
-  --header-height: #{$header-height};
+	--header-height: #{$header-height};
 
-  @include mobile {
-	  --header-height: #{$header-height-mobile};
-  }
+	@include mobile {
+		--header-height: #{$header-height-mobile};
+	}
 }
 
 a {
-  color: $link-color;
-  text-decoration: none;
+	color: $link-color;
+	text-decoration: none;
 
-  transition: color 0.15s;
+	transition: color 0.15s;
 
-  &:hover {
-    color: $link-hover;
-  }
+	&:hover {
+		color: $link-hover;
+	}
 }
 
 h1,
@@ -114,72 +60,72 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $accent-font-family;
-  font-variant: small-caps;
+	font-family: $accent-font-family;
+	font-variant: small-caps;
 }
 
 h1 {
-  font-size: 2.5em;
+	font-size: 2.5em;
 }
 
 h2 {
-  font-size: 2.25em;
+	font-size: 2.25em;
 }
 
 h3 {
-  font-size: 1.75em;
+	font-size: 1.75em;
 }
 
 h4 {
-  font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 h5 {
-  font-size: 1.25em;
+	font-size: 1.25em;
 }
 
 h6 {
-  font-size: 1.0em;
+	font-size: 1em;
 }
 
 p {
-  margin-bottom: 1em;
-  line-height: $paragraph-line-height;
+	margin-bottom: 1em;
+	line-height: $paragraph-line-height;
 
-  // &:last-child {
-  //   margin-bottom: 0;
-  // }
+	// &:last-child {
+	//   margin-bottom: 0;
+	// }
 }
 
 hr {
-  border: 0.125em solid $hr-color;
+	border: 0.125em solid $hr-color;
 }
 
 // For some reason these are a thing...
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 /*
  * Webkit scrollbar style
  */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+	width: 12px;
+	height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #ddd;
+	background-color: #ddd;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #999;
+	background-color: #999;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
+	background-color: #777;
 }
 
 /**
@@ -187,33 +133,85 @@ No script
  */
 
 noscript {
-  display: flex;
-  font-size: 1.2em;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	font-size: 1.2em;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
 }
 
-noscript+.spinner {
-  display: none;
+noscript + .spinner {
+	display: none;
 }
+
+/** Form */
+.form {
+	.field {
+		.field-label {
+			display: block;
+
+			&-optional-badge {
+				color: $font-grey;
+				font-size: 0.8em;
+			}
+		}
+
+		.field-desc {
+			color: $font-grey;
+			margin-bottom: 0.5em;
+		}
+
+		&.full-width {
+			grid-column: 1 / span 2;
+		}
+	}
+
+	&-grid-2 {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 1em;
+	}
+}
+
+/** App stuff */
+
+#app {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+section.page {
+	margin-top: calc(var(--header-height) + 1em);
+	flex-grow: 1;
+}
+
+.is-one-half {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.is-two-thirds {
+	width: 66.666%;
+	margin: 0 auto;
+}
+
+@include touch {
+	.container {
+		margin: 0 1em;
+	}
+}
+
+@media screen and (min-width: 1408px) {
+	section .container.narrow {
+		max-width: 1152px !important;
+	}
+}
+
 
 /***
  ***/
 
-@import "./layout/layout",
-"./layout/inputs",
-"./layout/includes/spinner",
-"./layout/includes/socialicon",
-"./layout/includes/form",
-"./layout/components/header",
-"./layout/components/footer",
-"./layout/components/progressiveimg",
-"./layout/components/gallery",
-"./layout/components/feed",
-"./layout/transitions/feed",
-"./layout/transitions/pages",
-"./layout/pages/front",
-"./layout/pages/contact",
-"./layout/pages/about",
-"./layout/pages/testimonials";
+ @import "inputs",
+ "transitions/feed",
+ "transitions/pages";

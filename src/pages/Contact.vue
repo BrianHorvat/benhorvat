@@ -374,3 +374,39 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+.page#contact {
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 3fr 1fr;
+		gap: 0 2em;
+	}
+
+	ul.social-media {
+		li.social-icon {
+			margin-bottom: 0.5em;
+		}
+	}
+
+	.contact-blurb {
+		margin-bottom: 1em;
+	}
+
+	.contact-date-row {
+		display: flex;
+		align-items: center;
+
+		margin-bottom: 0.5em;
+
+		.field-item {
+			flex-grow: 1;
+			margin-right: 0.5em;
+		}
+
+		input[type="text"] {
+			display: none;
+		}
+	}
+}
+</style>

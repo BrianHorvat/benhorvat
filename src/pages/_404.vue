@@ -42,3 +42,24 @@ export default {
 	}
 }
 </style>
+
+<style lang="scss" scoped>
+.page#about {
+	.about-grid {
+		display: grid;
+		grid-template-columns: 3fr 1fr;
+		gap: 0 2em;
+	}
+
+	.profile-picture {
+		padding-bottom: 120%;
+		margin-bottom: 1em;
+		border-radius: $corner-radius;
+		filter: $feed-card-shadow;
+	}
+
+	h4.profile-name {
+		text-align: center;
+	}
+}
+</style>
