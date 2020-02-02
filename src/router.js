@@ -23,7 +23,7 @@ export default new Router({
 		{
 			path: "/portfolio",
 			name: "portfolio",
-			component: () => import("./pages/Gallery"),
+			component: () => import("./pages/Portfolio"),
 			meta: {
 				depth: 1
 			}
